@@ -11,16 +11,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #080808;
-  --bg2: #111111;
-  --bg3: #1a1a1a;
-  --accent: #c8f060;
-  --accent2: #a8d040;
-  --text: #f0f0f0;
-  --muted: #666;
-  --muted2: #444;
-  --danger: #ff4444;
-  --radius: 12px;
+  --bg: #080808; --bg2: #111111; --bg3: #1a1a1a;
+  --accent: #c8f060; --accent2: #a8d040;
+  --text: #f0f0f0; --muted: #666; --muted2: #333;
+  --danger: #ff4444; --radius: 12px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -29,113 +23,118 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 #app { display: flex; flex-direction: column; height: 100vh; height: -webkit-fill-available; padding-top: var(--safe-top); padding-bottom: var(--safe-bottom); }
 .screen { display: none; flex-direction: column; flex: 1; overflow: hidden; }
 .screen.active { display: flex; }
-#splash { align-items: center; justify-content: center; background: var(--bg); }
+#splash { align-items: center; justify-content: center; }
 .splash-logo { font-family: 'Bebas Neue', sans-serif; font-size: 72px; letter-spacing: 12px; color: var(--accent); animation: pulseIn 1.2s ease forwards; }
-.splash-sub { font-size: 11px; letter-spacing: 4px; color: var(--muted); margin-top: 8px; text-transform: uppercase; animation: fadeUp 1.4s ease forwards; }
-@keyframes pulseIn { 0% { opacity: 0; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
-@keyframes fadeUp { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 0.5; transform: translateY(0); } }
+.splash-sub { font-size: 11px; letter-spacing: 4px; color: var(--muted); margin-top: 8px; text-transform: uppercase; }
+@keyframes pulseIn { 0% { opacity:0; transform:scale(0.9); } 100% { opacity:1; transform:scale(1); } }
 #nav { display: flex; border-bottom: 1px solid var(--muted2); background: var(--bg); flex-shrink: 0; }
-.nav-tab { flex: 1; padding: 14px 0; text-align: center; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: color 0.2s; font-family: 'DM Mono', monospace; }
-.nav-tab.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+.nav-tab { flex: 1; padding: 14px 0; text-align: center; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); cursor: pointer; font-family: 'DM Mono', monospace; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 .section-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); font-family: 'DM Mono', monospace; margin-bottom: 10px; }
-#generate-screen { flex: 1; overflow-y: auto; padding: 24px 20px 32px; -webkit-overflow-scrolling: touch; }
-.prompt-wrap { margin-bottom: 28px; }
-#prompt-input { width: 100%; background: var(--bg2); border: 1px solid var(--muted2); border-radius: var(--radius); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; padding: 16px; resize: none; min-height: 120px; outline: none; transition: border-color 0.2s; }
+
+/* GENERATE */
+#generate-screen { overflow-y: auto; padding: 24px 20px 40px; -webkit-overflow-scrolling: touch; }
+#prompt-input { width: 100%; background: var(--bg2); border: 1px solid var(--muted2); border-radius: var(--radius); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; padding: 16px; resize: none; min-height: 120px; outline: none; transition: border-color 0.2s; margin-bottom: 6px; }
 #prompt-input:focus { border-color: var(--accent); }
 #prompt-input::placeholder { color: var(--muted); }
-.time-wrap { margin-bottom: 28px; }
+.prompt-wrap { margin-bottom: 24px; }
+.time-wrap { margin-bottom: 24px; }
 .time-inputs { display: flex; gap: 12px; align-items: center; }
 .time-field { flex: 1; background: var(--bg2); border: 1px solid var(--muted2); border-radius: var(--radius); padding: 14px 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .time-field label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-family: 'DM Mono', monospace; }
-.time-field input { background: transparent; border: none; outline: none; color: var(--text); font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; text-align: center; width: 100%; -webkit-appearance: none; }
+.time-field input[type=number] { background: transparent; border: none; outline: none; color: var(--text); font-family: 'Bebas Neue', sans-serif; font-size: 36px; text-align: center; width: 100%; -webkit-appearance: none; }
 .time-field input::-webkit-inner-spin-button, .time-field input::-webkit-outer-spin-button { -webkit-appearance: none; }
-.time-colon { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--muted); padding-bottom: 4px; }
+.time-colon { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--muted); }
 .time-summary { margin-top: 10px; font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
 .time-summary span { color: var(--accent); }
-.voice-wrap { margin-bottom: 28px; }
+.voice-wrap { margin-bottom: 24px; }
 .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .voice-card { background: var(--bg2); border: 1px solid var(--muted2); border-radius: var(--radius); padding: 12px 14px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
 .voice-card.selected { border-color: var(--accent); background: rgba(200,240,96,0.06); }
-.voice-name { font-size: 14px; font-weight: 500; color: var(--text); }
-.voice-desc { font-size: 11px; color: var(--muted); margin-top: 2px; }
 .voice-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted2); margin-bottom: 6px; transition: background 0.2s; }
 .voice-card.selected .voice-dot { background: var(--accent); }
-#gen-btn { width: 100%; background: var(--accent); color: var(--bg); border: none; border-radius: var(--radius); font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; padding: 18px; cursor: pointer; transition: background 0.2s, transform 0.1s; margin-top: 4px; }
-#gen-btn:active { transform: scale(0.98); background: var(--accent2); }
-#gen-btn:disabled { background: var(--muted2); color: var(--muted); cursor: not-allowed; }
-#status-bar { margin-top: 16px; padding: 14px 16px; background: var(--bg2); border-radius: var(--radius); border-left: 3px solid var(--accent); font-size: 13px; color: var(--muted); display: none; font-family: 'DM Mono', monospace; }
+.voice-name { font-size: 14px; font-weight: 500; }
+.voice-desc { font-size: 11px; color: var(--muted); margin-top: 2px; }
+#gen-btn { width: 100%; background: var(--accent); color: var(--bg); border: none; border-radius: var(--radius); font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; padding: 18px; cursor: pointer; transition: background 0.2s; }
+#gen-btn:disabled { background: var(--muted2); color: var(--muted); }
+#status-bar { margin-top: 16px; padding: 14px 16px; background: var(--bg2); border-radius: var(--radius); border-left: 3px solid var(--accent); font-size: 13px; color: var(--muted); display: none; font-family: 'DM Mono', monospace; line-height: 1.5; }
 #status-bar.visible { display: block; }
 #status-bar.error { border-color: var(--danger); color: var(--danger); }
 #wave-progress { margin-top: 14px; display: none; }
 #wave-progress.visible { display: block; }
 .wave-bars { display: flex; gap: 4px; align-items: flex-end; height: 32px; }
-.wave-bar { flex: 1; border-radius: 3px; background: var(--muted2); transition: background 0.4s, height 0.4s; height: 8px; }
+.wave-bar { flex: 1; border-radius: 3px; background: var(--muted2); height: 8px; transition: all 0.4s; }
 .wave-bar.done { background: var(--accent); height: 28px; }
 .wave-bar.active { background: var(--accent); height: 20px; animation: pulse 0.8s ease infinite; }
-@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
-#player-tab-screen { flex: 1; display: none; flex-direction: column; }
-#player-tab-screen.active { display: flex; }
-#player-empty { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: var(--muted); padding: 40px; text-align: center; }
-#player-content { display: none; flex: 1; flex-direction: column; padding: 28px 20px 32px; overflow-y: auto; }
-.player-topic { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 3px; color: var(--text); line-height: 1.1; margin-bottom: 6px; }
-.player-meta { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; margin-bottom: 28px; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+
+/* PLAYER */
+#player-tab-screen { flex-direction: column; }
+#player-empty { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: var(--muted); text-align: center; padding: 40px; }
+#player-content { display: none; flex: 1; flex-direction: column; padding: 24px 20px 32px; overflow-y: auto; }
+.player-topic { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; line-height: 1.1; margin-bottom: 4px; }
+.player-topic-edit { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
+.edit-name-btn { background: none; border: none; color: var(--muted); font-size: 16px; cursor: pointer; padding: 4px; flex-shrink: 0; margin-top: 2px; }
+.player-meta { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; margin-bottom: 24px; }
 .player-meta span { color: var(--accent); }
-.visualizer { display: flex; align-items: center; justify-content: center; gap: 3px; height: 60px; margin-bottom: 28px; }
-.vis-bar { width: 3px; border-radius: 2px; background: var(--accent); opacity: 0.3; }
-.vis-bar.active { opacity: 1; animation: visAnimate 0.6s ease infinite; }
-.vis-bar:nth-child(odd) { animation-delay: 0.1s; }
-.vis-bar:nth-child(3n) { animation-delay: 0.2s; }
-@keyframes visAnimate { 0%,100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
-.progress-wrap { margin-bottom: 8px; }
+.visualizer { display: flex; align-items: center; justify-content: center; gap: 3px; height: 50px; margin-bottom: 20px; }
+.vis-bar { width: 3px; border-radius: 2px; background: var(--accent); opacity: 0.25; height: 8px; }
+.vis-bar.active { opacity: 1; animation: va 0.6s ease infinite; }
+.vis-bar:nth-child(2n){animation-delay:0.1s}.vis-bar:nth-child(3n){animation-delay:0.2s}
+@keyframes va{0%,100%{transform:scaleY(0.3)}50%{transform:scaleY(1)}}
+.progress-wrap { margin-bottom: 6px; }
 #progress-bar { width: 100%; height: 3px; -webkit-appearance: none; appearance: none; background: var(--muted2); border-radius: 2px; outline: none; }
 #progress-bar::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); cursor: pointer; }
 .progress-times { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 6px; }
-.player-controls { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; margin-top: 16px; }
-.ctrl-btn { background: none; border: none; color: var(--text); cursor: pointer; padding: 8px; opacity: 0.7; transition: opacity 0.2s; font-size: 22px; }
-#play-btn { width: 60px; height: 60px; background: var(--accent); border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--bg); transition: transform 0.1s; flex-shrink: 0; }
-#play-btn:active { transform: scale(0.94); }
-.player-extras { display: flex; gap: 10px; margin-bottom: 24px; }
-.extra-btn { flex: 1; background: var(--bg2); border: 1px solid var(--muted2); border-radius: 8px; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px; cursor: pointer; text-align: center; transition: border-color 0.2s, color 0.2s; }
+.player-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 16px 0; }
+.ctrl-btn { background: none; border: none; color: var(--text); cursor: pointer; opacity: 0.6; font-size: 20px; padding: 8px; }
+#play-btn { width: 60px; height: 60px; background: var(--accent); border-radius: 50%; border: none; cursor: pointer; font-size: 22px; color: var(--bg); display: flex; align-items: center; justify-content: center; }
+.player-extras { display: flex; gap: 10px; margin-bottom: 20px; }
+.extra-btn { flex: 1; background: var(--bg2); border: 1px solid var(--muted2); border-radius: 8px; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px; cursor: pointer; text-align: center; }
 .extra-btn.on { border-color: var(--accent); color: var(--accent); }
 .wave-queue { flex: 1; }
 .wave-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 8px; margin-bottom: 6px; background: var(--bg2); cursor: pointer; }
 .wave-item.playing { background: rgba(200,240,96,0.08); }
-.wave-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); width: 20px; flex-shrink: 0; }
-.wave-status { width: 8px; height: 8px; border-radius: 50%; background: var(--muted2); flex-shrink: 0; }
-.wave-item.playing .wave-status { background: var(--accent); }
-.wave-item.ready .wave-status { background: var(--muted); }
-.wave-label { font-size: 13px; color: var(--text); flex: 1; }
+.wave-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); width: 20px; }
+.wave-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted2); }
+.wave-item.playing .wave-dot { background: var(--accent); }
+.wave-item.ready .wave-dot { background: var(--muted); }
+.wave-label { font-size: 13px; flex: 1; }
 .wave-dur { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
-#library-screen { flex: 1; overflow-y: auto; padding: 20px 20px 32px; -webkit-overflow-scrolling: touch; }
-.lib-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+
+/* LIBRARY */
+#library-screen { overflow-y: auto; padding: 20px 20px 40px; -webkit-overflow-scrolling: touch; }
+.lib-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .lib-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; }
-.lib-count { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
-.folder { margin-bottom: 16px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--muted2); }
+.lib-actions { display: flex; gap: 8px; }
+.lib-btn { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--muted2); background: none; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; cursor: pointer; letter-spacing: 1px; }
+.lib-btn.accent { border-color: var(--accent); color: var(--accent); }
+.folder { margin-bottom: 14px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--muted2); }
 .folder-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: var(--bg2); cursor: pointer; }
-.folder-name { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 8px; }
-.folder-arrow { font-size: 11px; color: var(--muted); transition: transform 0.2s; }
+.folder-name { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+.folder-arrow { font-size: 10px; color: var(--muted); transition: transform 0.2s; }
 .folder.open .folder-arrow { transform: rotate(90deg); }
 .folder-items { display: none; }
 .folder.open .folder-items { display: block; }
-.session-card { padding: 14px 16px; border-top: 1px solid var(--muted2); cursor: pointer; display: flex; align-items: flex-start; gap: 12px; }
+.session-card { padding: 14px 16px; border-top: 1px solid var(--muted2); display: flex; align-items: flex-start; gap: 10px; }
 .session-info { flex: 1; min-width: 0; }
-.session-topic { font-size: 14px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
-.session-meta { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; display: flex; gap: 10px; }
+.session-name { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
+.session-meta { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; display: flex; gap: 8px; flex-wrap: wrap; }
 .session-actions { display: flex; gap: 6px; flex-shrink: 0; }
 .sess-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--muted2); background: none; color: var(--muted); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.topics-strip { margin-bottom: 20px; }
-.topics-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-.topics-scroll::-webkit-scrollbar { display: none; }
-.topic-chip { flex-shrink: 0; padding: 7px 14px; border-radius: 20px; border: 1px solid var(--muted2); font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; cursor: pointer; white-space: nowrap; }
 .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
-.empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+.empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.3; }
 .empty-text { font-size: 14px; line-height: 1.6; }
+
+/* MODAL */
 #modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; display: none; align-items: flex-end; padding-bottom: var(--safe-bottom); }
 #modal-overlay.visible { display: flex; }
-.modal-sheet { background: var(--bg2); border-radius: 20px 20px 0 0; padding: 24px 20px 32px; width: 100%; }
+.modal-sheet { background: var(--bg2); border-radius: 20px 20px 0 0; padding: 24px 20px 32px; width: 100%; max-height: 80vh; overflow-y: auto; }
 .modal-handle { width: 40px; height: 4px; background: var(--muted2); border-radius: 2px; margin: 0 auto 20px; }
 .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; margin-bottom: 16px; }
 .modal-body { font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 20px; }
+.modal-input { width: 100%; background: var(--bg3); border: 1px solid var(--muted2); border-radius: var(--radius); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; padding: 14px; outline: none; margin-bottom: 16px; }
+.modal-input:focus { border-color: var(--accent); }
 .modal-actions { display: flex; gap: 10px; }
 .modal-btn { flex: 1; padding: 14px; border-radius: var(--radius); border: 1px solid var(--muted2); background: none; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; }
 .modal-btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
@@ -146,89 +145,81 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 <body>
 <div id="app">
 
-  <div id="splash" class="screen active">
-    <div class="splash-logo">REWIRE</div>
-    <div class="splash-sub">Install your mind</div>
-  </div>
+<div id="splash" class="screen active">
+  <div class="splash-logo">REWIRE</div>
+  <div class="splash-sub">Install your mind</div>
+</div>
 
-  <div id="nav" style="display:none;">
-    <div class="nav-tab active" data-screen="generate">Generate</div>
-    <div class="nav-tab" data-screen="player-tab">Player</div>
-    <div class="nav-tab" data-screen="library">Library</div>
-  </div>
+<div id="nav" style="display:none">
+  <div class="nav-tab active" data-screen="generate">Generate</div>
+  <div class="nav-tab" data-screen="player-tab">Player</div>
+  <div class="nav-tab" data-screen="library">Library</div>
+</div>
 
-  <div id="generate-screen" class="screen">
-    <div class="prompt-wrap">
-      <div class="section-label">What are we installing today?</div>
-      <textarea id="prompt-input" placeholder="Describe what you want to internalize — a belief, a skill, a way of being." rows="5"></textarea>
-    </div>
-    <div class="time-wrap">
-      <div class="section-label">Session Length</div>
-      <div class="time-inputs">
-        <div class="time-field">
-          <label>Hours</label>
-          <input type="number" id="hours-input" min="0" max="4" value="0" inputmode="numeric">
-        </div>
-        <div class="time-colon">:</div>
-        <div class="time-field">
-          <label>Minutes</label>
-          <input type="number" id="minutes-input" min="0" max="59" value="20" inputmode="numeric">
-        </div>
-      </div>
-      <div class="time-summary">≈ <span id="wave-count">3</span> waves · <span id="word-count">3000</span> words · <span id="total-mins">20</span> min</div>
-    </div>
-    <div class="voice-wrap">
-      <div class="section-label">Voice</div>
-      <div class="voice-grid" id="voice-grid"></div>
-    </div>
-    <button id="gen-btn">Generate Session</button>
-    <div id="status-bar"></div>
-    <div id="wave-progress"><div class="wave-bars" id="wave-bars"></div></div>
+<div id="generate-screen" class="screen">
+  <div class="prompt-wrap">
+    <div class="section-label">What are we installing today?</div>
+    <textarea id="prompt-input" placeholder="Describe what you want to internalize — a belief, a skill, a way of being." rows="5"></textarea>
   </div>
-
-  <div id="player-tab-screen" class="screen">
-    <div id="player-empty">
-      <div style="font-size:40px;opacity:0.3;">◎</div>
-      <div style="font-size:14px;">No session loaded.<br>Generate one to start.</div>
+  <div class="time-wrap">
+    <div class="section-label">Session Length</div>
+    <div class="time-inputs">
+      <div class="time-field"><label>Hours</label><input type="number" id="hours-input" min="0" max="4" value="0" inputmode="numeric"></div>
+      <div class="time-colon">:</div>
+      <div class="time-field"><label>Minutes</label><input type="number" id="minutes-input" min="0" max="59" value="20" inputmode="numeric"></div>
     </div>
-    <div id="player-content">
+    <div class="time-summary">≈ <span id="wave-count">3</span> waves · <span id="word-count">3000</span> words · <span id="total-mins">20</span> min</div>
+  </div>
+  <div class="voice-wrap">
+    <div class="section-label">Voice</div>
+    <div class="voice-grid" id="voice-grid"></div>
+  </div>
+  <button id="gen-btn">Generate Session</button>
+  <div id="status-bar"></div>
+  <div id="wave-progress"><div class="wave-bars" id="wave-bars"></div></div>
+</div>
+
+<div id="player-tab-screen" class="screen">
+  <div id="player-empty">
+    <div style="font-size:40px;opacity:0.3">◎</div>
+    <div style="font-size:14px">No session loaded.<br>Generate one or load from Library.</div>
+  </div>
+  <div id="player-content">
+    <div class="player-topic-edit">
       <div class="player-topic" id="player-topic">—</div>
-      <div class="player-meta" id="player-meta">—</div>
-      <div class="visualizer" id="visualizer"></div>
-      <div class="progress-wrap">
-        <input type="range" id="progress-bar" min="0" max="100" value="0">
-        <div class="progress-times">
-          <span id="time-current">0:00</span>
-          <span id="time-total">0:00</span>
-        </div>
-      </div>
-      <div class="player-controls">
-        <button class="ctrl-btn" id="prev-wave-btn">⏮</button>
-        <button class="ctrl-btn" id="skip-back-btn">↺15</button>
-        <button id="play-btn">▶</button>
-        <button class="ctrl-btn" id="skip-fwd-btn">15↻</button>
-        <button class="ctrl-btn" id="next-wave-btn">⏭</button>
-      </div>
-      <div class="player-extras">
-        <button class="extra-btn" id="speed-btn">1×</button>
-        <button class="extra-btn" id="loop-btn">Loop Off</button>
-      </div>
-      <div class="section-label">Waves</div>
-      <div class="wave-queue" id="wave-queue"></div>
+      <button class="edit-name-btn" id="edit-name-btn" title="Rename">✎</button>
     </div>
+    <div class="player-meta" id="player-meta">—</div>
+    <div class="visualizer" id="visualizer"></div>
+    <div class="progress-wrap">
+      <input type="range" id="progress-bar" min="0" max="100" value="0">
+      <div class="progress-times"><span id="time-current">0:00</span><span id="time-total">0:00</span></div>
+    </div>
+    <div class="player-controls">
+      <button class="ctrl-btn" id="prev-wave-btn">⏮</button>
+      <button class="ctrl-btn" id="skip-back-btn">↺15</button>
+      <button id="play-btn">▶</button>
+      <button class="ctrl-btn" id="skip-fwd-btn">15↻</button>
+      <button class="ctrl-btn" id="next-wave-btn">⏭</button>
+    </div>
+    <div class="player-extras">
+      <button class="extra-btn" id="speed-btn">1×</button>
+      <button class="extra-btn" id="loop-btn">Loop Off</button>
+    </div>
+    <div class="section-label">Waves</div>
+    <div class="wave-queue" id="wave-queue"></div>
   </div>
+</div>
 
-  <div id="library-screen" class="screen">
-    <div class="lib-header">
-      <div class="lib-title">LIBRARY</div>
-      <div class="lib-count" id="lib-count">0 sessions</div>
+<div id="library-screen" class="screen">
+  <div class="lib-header">
+    <div class="lib-title">LIBRARY</div>
+    <div class="lib-actions">
+      <button class="lib-btn accent" id="shuffle-btn">⇄ Shuffle</button>
     </div>
-    <div class="topics-strip" id="topics-strip" style="display:none;">
-      <div class="section-label">Past Topics</div>
-      <div class="topics-scroll" id="topics-scroll"></div>
-    </div>
-    <div id="library-content"></div>
   </div>
+  <div id="library-content"></div>
+</div>
 
 </div>
 
@@ -237,12 +228,16 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
     <div class="modal-handle"></div>
     <div class="modal-title" id="modal-title"></div>
     <div class="modal-body" id="modal-body"></div>
+    <input type="text" class="modal-input" id="modal-input" style="display:none">
     <div class="modal-actions" id="modal-actions"></div>
   </div>
 </div>
 
 <script>
 const API_BASE = 'https://signal-api-xfyb.onrender.com';
+const STORE_KEY = 'rewire_v3';
+const WORDS_PER_MIN = 150;
+const WORDS_PER_WAVE = 750;
 
 const VOICES = [
   { id: 'nPczCjzI2devNBz1zQrb', name: 'Brian',    desc: 'Deep · Narrator · American' },
@@ -257,9 +252,6 @@ const VOICES = [
   { id: 'pFZP5JQG7iQjIQuC4Bku', name: 'Lily',     desc: 'Raspy · Expressive · British' },
 ];
 
-const WORDS_PER_MIN = 150;
-const WORDS_PER_WAVE = 750;
-
 const SYSTEM_PROMPT = `You are a specialist in cognitive reprogramming, identity reconstruction, and accelerated knowledge internalization. Your sole purpose is to write spoken audio content that installs beliefs, knowledge, and identity shifts directly into the listener's subconscious — not through inspiration or motivation, but through deep repetition, reframing, and neurological pattern-setting.
 
 This content will be listened to while the person is active — working, walking, training, driving. It is not a meditation. It does not ask the listener to close their eyes or breathe deeply. It speaks to them as a voice they trust completely — part mentor, part truth-teller, part the version of themselves they are becoming.
@@ -272,13 +264,13 @@ Never use bullet points, headers, or lists. Write in flowing spoken paragraphs o
 
 Open each wave with a bold reframe or undeniable truth. Build through layered reinforcement. Close every wave with an identity anchor — a short declarative statement the listener will carry with them.
 
-On learning topics: treat knowledge as identity. Don't explain concepts academically — install them as things the listener already understands at a bone-deep level. Like a download completing.
+On learning topics: treat knowledge as identity. Install them as things the listener already understands at a bone-deep level. Like a download completing.
 
 On mindset topics: speak to the person they are becoming as if they are already fully that person. By the end they should not feel motivated — they should feel like this is simply who they are.
 
 Write for the human voice. Natural rhythm. Conversational but authoritative.`;
 
-const STORE_KEY = 'rewire_v1';
+// ── STATE ──
 let state = {
   selectedVoice: VOICES[0].id,
   session: null,
@@ -288,13 +280,27 @@ let state = {
   speeds: [1, 1.25, 1.5, 1.75, 2],
   speedIdx: 0,
   loop: false,
+  shuffleQueue: [],
+  shuffleIdx: 0,
+  shuffleMode: false,
 };
 const audio = new Audio();
 
+// ── STORAGE ──
 function loadSessions() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { return []; } }
 function saveSessions(s) { localStorage.setItem(STORE_KEY, JSON.stringify(s)); }
-function saveSession(s) { const all = loadSessions(); const i = all.findIndex(x => x.id === s.id); if (i >= 0) all[i] = s; else all.unshift(s); saveSessions(all); }
+function saveSession(s) {
+  const all = loadSessions();
+  const i = all.findIndex(x => x.id === s.id);
+  if (i >= 0) all[i] = s; else all.unshift(s);
+  saveSessions(all);
+}
 function deleteSession(id) { saveSessions(loadSessions().filter(s => s.id !== id)); }
+function renameSession(id, name) {
+  const all = loadSessions();
+  const s = all.find(x => x.id === id);
+  if (s) { s.name = name; saveSessions(all); }
+}
 function groupByMonth(sessions) {
   const g = {};
   sessions.forEach(s => {
@@ -305,6 +311,7 @@ function groupByMonth(sessions) {
   return g;
 }
 
+// ── INIT ──
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('splash').classList.remove('active');
@@ -317,6 +324,7 @@ window.addEventListener('load', () => {
   }, 1800);
 });
 
+// ── NAV ──
 document.querySelectorAll('.nav-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     const t = tab.dataset.screen;
@@ -328,9 +336,22 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
   });
 });
 
+function switchTab(name) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`[data-screen="${name}"]`).classList.add('active');
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(name + '-screen').classList.add('active');
+}
+
+// ── VOICE GRID ──
 function initVoiceGrid() {
   const g = document.getElementById('voice-grid');
-  g.innerHTML = VOICES.map(v => `<div class="voice-card ${v.id === state.selectedVoice ? 'selected' : ''}" data-id="${v.id}"><div class="voice-dot"></div><div class="voice-name">${v.name}</div><div class="voice-desc">${v.desc}</div></div>`).join('');
+  g.innerHTML = VOICES.map(v => `
+    <div class="voice-card ${v.id === state.selectedVoice ? 'selected' : ''}" data-id="${v.id}">
+      <div class="voice-dot"></div>
+      <div class="voice-name">${v.name}</div>
+      <div class="voice-desc">${v.desc}</div>
+    </div>`).join('');
   g.querySelectorAll('.voice-card').forEach(c => c.addEventListener('click', () => {
     state.selectedVoice = c.dataset.id;
     g.querySelectorAll('.voice-card').forEach(x => x.classList.remove('selected'));
@@ -338,17 +359,18 @@ function initVoiceGrid() {
   }));
 }
 
+// ── TIME INPUTS ──
 function initTimeInputs() {
   const h = document.getElementById('hours-input');
   const m = document.getElementById('minutes-input');
   const update = () => {
-    let hv = Math.min(4, Math.max(0, parseInt(h.value) || 0));
-    let mv = Math.min(59, Math.max(0, parseInt(m.value) || 0));
-    if (hv === 4) mv = 0;
-    h.value = hv; m.value = mv;
-    const total = hv * 60 + mv;
-    const words = Math.max(750, Math.round(total * WORDS_PER_MIN));
-    const waves = Math.max(1, Math.round(words / WORDS_PER_WAVE));
+    let hv = Math.min(4, Math.max(0, parseInt(h.value)||0));
+    let mv = Math.min(59, Math.max(0, parseInt(m.value)||0));
+    if (hv===4) mv=0;
+    h.value=hv; m.value=mv;
+    const total = hv*60+mv;
+    const words = Math.max(WORDS_PER_WAVE, Math.round(total*WORDS_PER_MIN));
+    const waves = Math.max(1, Math.round(words/WORDS_PER_WAVE));
     document.getElementById('wave-count').textContent = waves;
     document.getElementById('word-count').textContent = words.toLocaleString();
     document.getElementById('total-mins').textContent = total;
@@ -357,91 +379,125 @@ function initTimeInputs() {
   h.addEventListener('blur', update); m.addEventListener('blur', update);
   update();
 }
-
 function getTotalMins() {
-  return (parseInt(document.getElementById('hours-input').value) || 0) * 60 +
-         (parseInt(document.getElementById('minutes-input').value) || 0);
+  return (parseInt(document.getElementById('hours-input').value)||0)*60 +
+         (parseInt(document.getElementById('minutes-input').value)||0);
 }
 
+// ── VISUALIZER ──
 function initVisualizer() {
   document.getElementById('visualizer').innerHTML =
-    Array.from({length: 20}, () => `<div class="vis-bar" style="height:${8+Math.random()*24}px"></div>`).join('');
+    Array.from({length:20},()=>`<div class="vis-bar" style="height:${8+Math.random()*24}px"></div>`).join('');
 }
-
 function setVisualizerPlaying(on) {
   document.querySelectorAll('.vis-bar').forEach(b => {
     b.classList.toggle('active', on);
-    if (!on) b.style.height = (8 + Math.random() * 24) + 'px';
+    if (!on) b.style.height=(8+Math.random()*24)+'px';
   });
 }
 
+// ── GENERATE ──
 document.getElementById('gen-btn').addEventListener('click', async () => {
   const prompt = document.getElementById('prompt-input').value.trim();
   if (!prompt) { showStatus('Enter a topic first.', true); return; }
   const totalMins = getTotalMins();
   if (totalMins < 1) { showStatus('Set at least 1 minute.', true); return; }
 
-  const totalWords = Math.max(750, Math.round(totalMins * WORDS_PER_MIN));
-  const waveCount = Math.max(1, Math.round(totalWords / WORDS_PER_WAVE));
-  const wordsPerWave = Math.round(totalWords / waveCount);
+  const totalWords = Math.max(WORDS_PER_WAVE, Math.round(totalMins*WORDS_PER_MIN));
+  const waveCount = Math.max(1, Math.round(totalWords/WORDS_PER_WAVE));
+  const wordsPerWave = Math.round(totalWords/waveCount);
 
   state.audioBlobs = new Array(waveCount).fill(null);
+  state.session = null;
   document.getElementById('gen-btn').disabled = true;
+  document.getElementById('player-content').style.display = 'none';
+  document.getElementById('player-empty').style.display = 'flex';
 
   const barsEl = document.getElementById('wave-bars');
-  barsEl.innerHTML = Array.from({length: waveCount}, (_, i) => `<div class="wave-bar" id="wb-${i}"></div>`).join('');
+  barsEl.innerHTML = Array.from({length:waveCount},(_,i)=>`<div class="wave-bar" id="wb-${i}"></div>`).join('');
   document.getElementById('wave-progress').classList.add('visible');
 
   const sessionId = Date.now().toString();
-  const voiceName = VOICES.find(v => v.id === state.selectedVoice)?.name || 'Daniel';
-  state.session = { id: sessionId, topic: prompt, createdAt: new Date().toISOString(), totalMins, waveCount, voice: voiceName, voiceId: state.selectedVoice, waves: [] };
+  const voiceObj = VOICES.find(v=>v.id===state.selectedVoice)||VOICES[0];
+  state.session = {
+    id: sessionId,
+    name: prompt,
+    topic: prompt,
+    createdAt: new Date().toISOString(),
+    totalMins,
+    waveCount,
+    voice: voiceObj.name,
+    voiceId: state.selectedVoice,
+    waves: [],
+  };
 
-  showStatus('Waking up server — this can take up to 60 seconds…');
-  try { await fetch(`${API_BASE}/health`, { signal: AbortSignal.timeout(90000) }); } catch {}
-
-  showStatus(`Generating ${waveCount} wave${waveCount > 1 ? 's' : ''}…`);
-
-  async function genWave(idx) {
-    setBar(idx, 'active');
-    const position = idx === 0 ? 'This is the opening wave. Establish the frame, break old patterns, set the stage powerfully.' : idx === waveCount - 1 ? 'This is the final wave. Anchor the identity completely. Close the loop. Leave a lasting imprint the listener will carry all day.' : `This is wave ${idx + 1} of ${waveCount}. Deepen the install. Approach the core truth from a new angle. Build on what came before.`;
-    const fullPrompt = `${SYSTEM_PROMPT}\n\nWord target: ${wordsPerWave} words.\n\n${position}\n\nTopic/Goal: ${prompt}`;
-    const res = await fetch(`${API_BASE}/api/generate`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ prompt: fullPrompt }), signal: AbortSignal.timeout(120000) });
-    if (!res.ok) throw new Error(`Generate failed ${res.status}`);
-    const data = await res.json();
-    return data.content || data.text || '';
+  // Wake server
+  showStatus('Waking up server…');
+  let awake = false;
+  for (let i=0; i<8; i++) {
+    try {
+      const r = await fetch(`${API_BASE}/health`, {signal: AbortSignal.timeout(15000)});
+      if (r.ok) { awake=true; break; }
+    } catch {}
+    showStatus(`Waking up server… ${(i+1)*15}s`);
+  }
+  if (!awake) {
+    showStatus('Server not responding. Try again in a moment.', true);
+    document.getElementById('gen-btn').disabled = false;
+    return;
   }
 
-  async function synthWave(idx, text) {
-    const res = await fetch(`${API_BASE}/api/synthesize`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ text, voiceId: state.selectedVoice }), signal: AbortSignal.timeout(180000) });
-    if (!res.ok) throw new Error(`Synth failed ${res.status}`);
-    return URL.createObjectURL(await res.blob());
-  }
-
+  // Sequential generation
   try {
-    const text0 = await genWave(0);
-    state.session.waves.push({ idx: 0, text: text0 });
-    const url0 = await synthWave(0, text0);
-    state.audioBlobs[0] = url0;
-    setBar(0, 'done');
-    saveSession(state.session);
-    showStatus('Wave 1 ready — loading player…');
-    loadPlayer(state.session);
-    switchTab('player-tab');
+    for (let idx=0; idx<waveCount; idx++) {
+      const position = idx===0
+        ? 'This is the opening wave. Establish the frame, break old patterns, set the stage powerfully.'
+        : idx===waveCount-1
+        ? 'This is the final wave. Anchor the identity completely. Close the loop. Leave a lasting imprint.'
+        : `This is wave ${idx+1} of ${waveCount}. Deepen the install. Approach the core truth from a new angle.`;
 
-    if (waveCount > 1) {
-      await Promise.all(Array.from({length: waveCount - 1}, (_, i) => i + 1).map(async idx => {
-        const text = await genWave(idx);
-        state.session.waves.push({ idx, text });
-        const url = await synthWave(idx, text);
-        state.audioBlobs[idx] = url;
-        setBar(idx, 'done');
-        saveSession(state.session);
-        updateWaveQueue();
-      }));
+      const fullPrompt = `${SYSTEM_PROMPT}\n\nWord target: ${wordsPerWave} words.\n\n${position}\n\nTopic/Goal: ${prompt}`;
+
+      setBar(idx, 'active');
+      showStatus(`Generating wave ${idx+1} of ${waveCount}…`);
+
+      const genRes = await fetch(`${API_BASE}/api/generate`, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({prompt: fullPrompt}),
+        signal: AbortSignal.timeout(120000),
+      });
+      if (!genRes.ok) throw new Error(`Generate failed ${genRes.status}`);
+      const genData = await genRes.json();
+      const text = genData.content || genData.text || '';
+
+      showStatus(`Synthesizing wave ${idx+1} of ${waveCount}…`);
+      const synthRes = await fetch(`${API_BASE}/api/synthesize`, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({text, voiceId: state.selectedVoice}),
+        signal: AbortSignal.timeout(180000),
+      });
+      if (!synthRes.ok) throw new Error(`Synth failed ${synthRes.status}`);
+      const blob = await synthRes.blob();
+      const url = URL.createObjectURL(blob);
+
+      state.audioBlobs[idx] = url;
+      state.session.waves.push({idx, text});
+      setBar(idx, 'done');
+      saveSession(state.session);
+
+      // Load player on first wave
+      if (idx===0) {
+        loadPlayer(state.session);
+        switchTab('player-tab');
+        showStatus(`Wave 1 ready — playing. Generating remaining waves…`);
+      }
+
+      updateWaveQueue();
     }
 
     showStatus(`All ${waveCount} waves ready.`);
     saveSession(state.session);
+
   } catch(err) {
     console.error(err);
     showStatus('Error: ' + err.message, true);
@@ -450,142 +506,282 @@ document.getElementById('gen-btn').addEventListener('click', async () => {
   }
 });
 
-function setBar(i, s) { const b = document.getElementById(`wb-${i}`); if (b) b.className = 'wave-bar ' + s; }
+function setBar(i, s) { const b=document.getElementById(`wb-${i}`); if(b) b.className='wave-bar '+s; }
 function showStatus(msg, err=false) {
   const el = document.getElementById('status-bar');
-  el.textContent = msg; el.style.display = 'block';
-  el.className = 'status-bar visible' + (err ? ' error' : '');
+  el.textContent=msg; el.style.display='block';
+  el.className='status-bar visible'+(err?' error':'');
 }
 
-function switchTab(name) {
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.querySelector(`[data-screen="${name}"]`).classList.add('active');
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(name + '-screen').classList.add('active');
-}
-
+// ── PLAYER ──
 function loadPlayer(session) {
-  document.getElementById('player-empty').style.display = 'none';
-  document.getElementById('player-content').style.display = 'flex';
-  document.getElementById('player-content').style.flexDirection = 'column';
-  document.getElementById('player-topic').textContent = session.topic;
-  const vn = VOICES.find(v => v.id === session.voiceId)?.name || session.voice;
-  document.getElementById('player-meta').innerHTML = `<span>${session.waveCount} waves</span> · <span>${session.totalMins} min</span> · ${vn}`;
-  state.currentWave = 0;
-  loadWave(0);
+  document.getElementById('player-empty').style.display='none';
+  document.getElementById('player-content').style.display='flex';
+  document.getElementById('player-content').style.flexDirection='column';
+  document.getElementById('player-topic').textContent = session.name||session.topic;
+  const vn = VOICES.find(v=>v.id===session.voiceId)?.name||session.voice;
+  document.getElementById('player-meta').innerHTML =
+    `<span>${session.waveCount} waves</span> · <span>${session.totalMins} min</span> · ${vn}`;
+  state.currentWave=0;
+  if (state.audioBlobs[0]) loadWave(0);
   updateWaveQueue();
+}
+
+function loadSessionFromLibrary(session) {
+  // Re-synthesize from saved text
+  state.session = session;
+  state.audioBlobs = new Array(session.waveCount).fill(null);
+  loadPlayer(session);
+  switchTab('player-tab');
+
+  // Synthesize waves sequentially
+  (async () => {
+    for (let idx=0; idx<session.waves.length; idx++) {
+      const wave = session.waves.find(w=>w.idx===idx);
+      if (!wave) continue;
+      try {
+        const res = await fetch(`${API_BASE}/api/synthesize`, {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({text: wave.text, voiceId: session.voiceId}),
+          signal: AbortSignal.timeout(180000),
+        });
+        if (!res.ok) continue;
+        state.audioBlobs[idx] = URL.createObjectURL(await res.blob());
+        if (idx===0) { loadWave(0); audio.play(); setPlaying(true); }
+        updateWaveQueue();
+      } catch(e) { console.error(e); }
+    }
+  })();
 }
 
 function loadWave(idx) {
   const url = state.audioBlobs[idx];
   if (!url) return;
-  audio.src = url;
-  audio.playbackRate = state.speeds[state.speedIdx];
-  state.currentWave = idx;
+  audio.src=url;
+  audio.playbackRate=state.speeds[state.speedIdx];
+  state.currentWave=idx;
   updateWaveQueue();
 }
 
 function updateWaveQueue() {
   if (!state.session) return;
   const el = document.getElementById('wave-queue');
-  el.innerHTML = Array.from({length: state.session.waveCount}, (_, i) => {
-    const ready = !!state.audioBlobs[i];
-    const playing = i === state.currentWave;
-    return `<div class="wave-item ${playing?'playing':ready?'ready':''}" data-idx="${i}"><div class="wave-num">${String(i+1).padStart(2,'0')}</div><div class="wave-status"></div><div class="wave-label">Wave ${i+1}${playing?' — playing':ready?'':' — generating…'}</div><div class="wave-dur">${ready?'~'+Math.round(WORDS_PER_WAVE/WORDS_PER_MIN)+'m':'…'}</div></div>`;
+  el.innerHTML = Array.from({length:state.session.waveCount},(_,i)=>{
+    const ready=!!state.audioBlobs[i];
+    const playing=i===state.currentWave&&state.isPlaying;
+    return `<div class="wave-item ${playing?'playing':ready?'ready':''}" data-idx="${i}">
+      <div class="wave-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="wave-dot"></div>
+      <div class="wave-label">Wave ${i+1}${playing?' — playing':!ready?' — generating…':''}</div>
+      <div class="wave-dur">${ready?'~'+Math.round(WORDS_PER_WAVE/WORDS_PER_MIN)+'m':'…'}</div>
+    </div>`;
   }).join('');
-  el.querySelectorAll('.wave-item').forEach(item => item.addEventListener('click', () => {
-    const i = parseInt(item.dataset.idx);
-    if (state.audioBlobs[i]) { loadWave(i); audio.play(); setPlaying(true); }
+  el.querySelectorAll('.wave-item').forEach(item=>item.addEventListener('click',()=>{
+    const i=parseInt(item.dataset.idx);
+    if(state.audioBlobs[i]){loadWave(i);audio.play();setPlaying(true);}
   }));
 }
 
-document.getElementById('play-btn').addEventListener('click', () => {
-  if (audio.paused) { audio.play(); setPlaying(true); } else { audio.pause(); setPlaying(false); }
+// Player controls
+document.getElementById('play-btn').addEventListener('click',()=>{
+  if(audio.paused){audio.play();setPlaying(true);}else{audio.pause();setPlaying(false);}
 });
-document.getElementById('skip-back-btn').addEventListener('click', () => { audio.currentTime = Math.max(0, audio.currentTime - 15); });
-document.getElementById('skip-fwd-btn').addEventListener('click', () => { audio.currentTime = Math.min(audio.duration||0, audio.currentTime+15); });
-document.getElementById('prev-wave-btn').addEventListener('click', () => { if (state.currentWave > 0) { loadWave(state.currentWave-1); if(state.isPlaying) audio.play(); } });
-document.getElementById('next-wave-btn').addEventListener('click', () => { const n=state.currentWave+1; if(n<(state.session?.waveCount||0)&&state.audioBlobs[n]){loadWave(n);if(state.isPlaying)audio.play();} });
-document.getElementById('speed-btn').addEventListener('click', () => { state.speedIdx=(state.speedIdx+1)%state.speeds.length; audio.playbackRate=state.speeds[state.speedIdx]; document.getElementById('speed-btn').textContent=state.speeds[state.speedIdx]+'×'; });
-document.getElementById('loop-btn').addEventListener('click', () => { state.loop=!state.loop; const b=document.getElementById('loop-btn'); b.textContent=state.loop?'Loop On':'Loop Off'; b.classList.toggle('on',state.loop); });
-
-audio.addEventListener('ended', () => {
-  const n = state.currentWave+1;
-  if (n < (state.session?.waveCount||0) && state.audioBlobs[n]) { loadWave(n); audio.play(); }
-  else if (state.loop && state.audioBlobs[0]) { loadWave(0); audio.play(); }
-  else setPlaying(false);
+document.getElementById('skip-back-btn').addEventListener('click',()=>{audio.currentTime=Math.max(0,audio.currentTime-15);});
+document.getElementById('skip-fwd-btn').addEventListener('click',()=>{audio.currentTime=Math.min(audio.duration||0,audio.currentTime+15);});
+document.getElementById('prev-wave-btn').addEventListener('click',()=>{
+  if(state.currentWave>0){loadWave(state.currentWave-1);if(state.isPlaying)audio.play();}
+});
+document.getElementById('next-wave-btn').addEventListener('click',()=>{
+  const n=state.currentWave+1;
+  if(n<(state.session?.waveCount||0)&&state.audioBlobs[n]){loadWave(n);if(state.isPlaying)audio.play();}
+});
+document.getElementById('speed-btn').addEventListener('click',()=>{
+  state.speedIdx=(state.speedIdx+1)%state.speeds.length;
+  audio.playbackRate=state.speeds[state.speedIdx];
+  document.getElementById('speed-btn').textContent=state.speeds[state.speedIdx]+'×';
+});
+document.getElementById('loop-btn').addEventListener('click',()=>{
+  state.loop=!state.loop;
+  const b=document.getElementById('loop-btn');
+  b.textContent=state.loop?'Loop On':'Loop Off';
+  b.classList.toggle('on',state.loop);
 });
 
-audio.addEventListener('timeupdate', () => {
-  if (!audio.duration) return;
-  document.getElementById('progress-bar').value = (audio.currentTime/audio.duration)*100;
-  document.getElementById('time-current').textContent = fmt(audio.currentTime);
-  document.getElementById('time-total').textContent = fmt(audio.duration);
+audio.addEventListener('ended',()=>{
+  const n=state.currentWave+1;
+  if(n<(state.session?.waveCount||0)&&state.audioBlobs[n]){
+    loadWave(n);audio.play();
+  } else if(state.shuffleMode){
+    playNextShuffle();
+  } else if(state.loop&&state.audioBlobs[0]){
+    loadWave(0);audio.play();
+  } else {
+    setPlaying(false);
+  }
 });
 
-document.getElementById('progress-bar').addEventListener('input', e => { if(audio.duration) audio.currentTime=(e.target.value/100)*audio.duration; });
+audio.addEventListener('timeupdate',()=>{
+  if(!audio.duration)return;
+  document.getElementById('progress-bar').value=(audio.currentTime/audio.duration)*100;
+  document.getElementById('time-current').textContent=fmt(audio.currentTime);
+  document.getElementById('time-total').textContent=fmt(audio.duration);
+});
+document.getElementById('progress-bar').addEventListener('input',e=>{
+  if(audio.duration)audio.currentTime=(e.target.value/100)*audio.duration;
+});
 
-function setPlaying(v) { state.isPlaying=v; document.getElementById('play-btn').textContent=v?'⏸':'▶'; setVisualizerPlaying(v); }
-function fmt(s) { if(!s||isNaN(s)) return '0:00'; return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`; }
+function setPlaying(v){
+  state.isPlaying=v;
+  document.getElementById('play-btn').textContent=v?'⏸':'▶';
+  setVisualizerPlaying(v);
+  updateWaveQueue();
+}
+function fmt(s){if(!s||isNaN(s))return'0:00';return`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;}
 
-function renderLibrary() {
-  const sessions = loadSessions();
-  document.getElementById('lib-count').textContent = `${sessions.length} session${sessions.length!==1?'s':''}`;
-  const content = document.getElementById('library-content');
-  if (!sessions.length) {
-    content.innerHTML = `<div class="empty-state"><div class="empty-icon">◎</div><div class="empty-text">No sessions yet.<br>Generate your first install.</div></div>`;
-    document.getElementById('topics-strip').style.display = 'none';
+// Edit name
+document.getElementById('edit-name-btn').addEventListener('click',()=>{
+  if(!state.session)return;
+  showModal('Rename Session','',[],'text',state.session.name||state.session.topic,[
+    {label:'Cancel',action:hideModal},
+    {label:'Save',cls:'primary',action:()=>{
+      const val=document.getElementById('modal-input').value.trim();
+      if(val&&state.session){
+        state.session.name=val;
+        saveSession(state.session);
+        document.getElementById('player-topic').textContent=val;
+      }
+      hideModal();
+    }}
+  ]);
+});
+
+// ── SHUFFLE ──
+document.getElementById('shuffle-btn').addEventListener('click',()=>{
+  const sessions=loadSessions();
+  if(!sessions.length){return;}
+  const shuffled=[...sessions].sort(()=>Math.random()-0.5);
+  state.shuffleQueue=shuffled;
+  state.shuffleIdx=0;
+  state.shuffleMode=true;
+  loadSessionFromLibrary(shuffled[0]);
+  showStatus('Shuffle mode on — loading sessions in random order.');
+});
+
+function playNextShuffle(){
+  state.shuffleIdx++;
+  if(state.shuffleIdx>=state.shuffleQueue.length){
+    state.shuffleMode=false;
+    setPlaying(false);
     return;
   }
-  const topics = [...new Set(sessions.map(s => s.topic.split(' ').slice(0,5).join(' ')))].slice(0,10);
-  document.getElementById('topics-strip').style.display = 'block';
-  document.getElementById('topics-scroll').innerHTML = topics.map(t => `<div class="topic-chip" data-topic="${t}">${t}</div>`).join('');
-  document.querySelectorAll('.topic-chip').forEach(c => c.addEventListener('click', () => {
-    document.getElementById('prompt-input').value = c.dataset.topic;
-    switchTab('generate');
-  }));
-  const groups = groupByMonth(sessions);
-  content.innerHTML = Object.entries(groups).map(([month, items], gi) => `
+  loadSessionFromLibrary(state.shuffleQueue[state.shuffleIdx]);
+}
+
+// ── LIBRARY ──
+function renderLibrary(){
+  const sessions=loadSessions();
+  const content=document.getElementById('library-content');
+  if(!sessions.length){
+    content.innerHTML=`<div class="empty-state"><div class="empty-icon">◎</div><div class="empty-text">No sessions yet.<br>Generate your first install.</div></div>`;
+    return;
+  }
+  const groups=groupByMonth(sessions);
+  content.innerHTML=Object.entries(groups).map(([month,items],gi)=>`
     <div class="folder ${gi===0?'open':''}" id="fold-${gi}">
       <div class="folder-header" onclick="toggleFolder('fold-${gi}')">
-        <div class="folder-name"><span>📁</span>${month}</div>
+        <div class="folder-name"><span>📁</span>${month} <span style="color:var(--muted);margin-left:4px">${items.length}</span></div>
         <div class="folder-arrow">▶</div>
       </div>
-      <div class="folder-items">${items.map(s => {
-        const d = new Date(s.createdAt);
-        return `<div class="session-card"><div class="session-info"><div class="session-topic">${s.topic}</div><div class="session-meta"><span>${d.toLocaleDateString('default',{month:'short',day:'numeric'})}</span><span>${s.totalMins}min</span><span>${s.voice||'Daniel'}</span></div></div><div class="session-actions"><button class="sess-btn" onclick="reloadPrompt('${s.id}')">↺</button><button class="sess-btn" onclick="confirmDelete('${s.id}')">✕</button></div></div>`;
-      }).join('')}</div>
+      <div class="folder-items">
+        ${items.map(s=>{
+          const d=new Date(s.createdAt);
+          const displayName=s.name||s.topic;
+          return `<div class="session-card">
+            <div class="session-info">
+              <div class="session-name">${displayName}</div>
+              <div class="session-meta">
+                <span>${d.toLocaleDateString('default',{month:'short',day:'numeric'})}</span>
+                <span>${s.totalMins}min</span>
+                <span>${s.voice||'Daniel'}</span>
+                <span>${s.waveCount} waves</span>
+              </div>
+            </div>
+            <div class="session-actions">
+              <button class="sess-btn" title="Play" onclick="libPlay('${s.id}')">▶</button>
+              <button class="sess-btn" title="Rename" onclick="libRename('${s.id}')">✎</button>
+              <button class="sess-btn" title="Reload prompt" onclick="libReload('${s.id}')">↺</button>
+              <button class="sess-btn" title="Delete" onclick="libDelete('${s.id}')">✕</button>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
     </div>`).join('');
 }
 
-window.toggleFolder = id => document.getElementById(id).classList.toggle('open');
-window.reloadPrompt = id => {
-  const s = loadSessions().find(x => x.id===id);
-  if (!s) return;
-  document.getElementById('prompt-input').value = s.topic;
-  document.getElementById('hours-input').value = Math.floor(s.totalMins/60);
-  document.getElementById('minutes-input').value = s.totalMins%60;
-  document.getElementById('hours-input').dispatchEvent(new Event('input'));
-  switchTab('generate');
+window.toggleFolder=id=>document.getElementById(id).classList.toggle('open');
+
+window.libPlay=id=>{
+  const s=loadSessions().find(x=>x.id===id);
+  if(!s)return;
+  loadSessionFromLibrary(s);
 };
-window.confirmDelete = id => {
-  const s = loadSessions().find(x => x.id===id);
-  if (!s) return;
-  showModal('Delete Session', `Delete "${s.topic.substring(0,50)}"? This cannot be undone.`, [
-    {label:'Cancel', action: hideModal},
-    {label:'Delete', cls:'danger', action: () => { deleteSession(id); hideModal(); renderLibrary(); }}
+
+window.libRename=id=>{
+  const s=loadSessions().find(x=>x.id===id);
+  if(!s)return;
+  showModal('Rename Session','',[],'text',s.name||s.topic,[
+    {label:'Cancel',action:hideModal},
+    {label:'Save',cls:'primary',action:()=>{
+      const val=document.getElementById('modal-input').value.trim();
+      if(val)renameSession(id,val);
+      hideModal();renderLibrary();
+    }}
   ]);
 };
 
-function showModal(title, body, actions) {
-  document.getElementById('modal-title').textContent = title;
-  document.getElementById('modal-body').textContent = body;
-  document.getElementById('modal-actions').innerHTML = '';
-  actions.forEach(a => { const b=document.createElement('button'); b.className=`modal-btn ${a.cls||''}`; b.textContent=a.label; b.addEventListener('click',a.action); document.getElementById('modal-actions').appendChild(b); });
+window.libReload=id=>{
+  const s=loadSessions().find(x=>x.id===id);
+  if(!s)return;
+  document.getElementById('prompt-input').value=s.topic;
+  document.getElementById('hours-input').value=Math.floor(s.totalMins/60);
+  document.getElementById('minutes-input').value=s.totalMins%60;
+  document.getElementById('hours-input').dispatchEvent(new Event('input'));
+  switchTab('generate');
+};
+
+window.libDelete=id=>{
+  const s=loadSessions().find(x=>x.id===id);
+  if(!s)return;
+  showModal('Delete Session',`Delete "${(s.name||s.topic).substring(0,50)}"? This cannot be undone.`,[],'none','',[
+    {label:'Cancel',action:hideModal},
+    {label:'Delete',cls:'danger',action:()=>{deleteSession(id);hideModal();renderLibrary();}}
+  ]);
+};
+
+// ── MODAL ──
+function showModal(title,body,actions,inputType='none',inputVal='',$actions){
+  document.getElementById('modal-title').textContent=title;
+  document.getElementById('modal-body').textContent=body;
+  const inp=document.getElementById('modal-input');
+  if(inputType==='text'){inp.style.display='block';inp.value=inputVal||'';}
+  else inp.style.display='none';
+  const actEl=document.getElementById('modal-actions');
+  actEl.innerHTML='';
+  const acts=$actions||actions;
+  acts.forEach(a=>{
+    const b=document.createElement('button');
+    b.className=`modal-btn ${a.cls||''}`;
+    b.textContent=a.label;
+    b.addEventListener('click',a.action);
+    actEl.appendChild(b);
+  });
   document.getElementById('modal-overlay').classList.add('visible');
+  if(inputType==='text')setTimeout(()=>inp.focus(),100);
 }
-function hideModal() { document.getElementById('modal-overlay').classList.remove('visible'); }
-document.getElementById('modal-overlay').addEventListener('click', e => { if(e.target===document.getElementById('modal-overlay')) hideModal(); });
+function hideModal(){document.getElementById('modal-overlay').classList.remove('visible');}
+document.getElementById('modal-overlay').addEventListener('click',e=>{
+  if(e.target===document.getElementById('modal-overlay'))hideModal();
+});
 </script>
 </body>
 </html>
