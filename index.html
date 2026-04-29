@@ -31,8 +31,6 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 .nav-tab { flex: 1; padding: 14px 0; text-align: center; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); cursor: pointer; font-family: 'DM Mono', monospace; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
 .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 .section-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); font-family: 'DM Mono', monospace; margin-bottom: 10px; }
-
-/* GENERATE */
 #generate-screen { overflow-y: auto; padding: 24px 20px 40px; -webkit-overflow-scrolling: touch; }
 #prompt-input { width: 100%; background: var(--bg2); border: 1px solid var(--muted2); border-radius: var(--radius); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; padding: 16px; resize: none; min-height: 120px; outline: none; transition: border-color 0.2s; margin-bottom: 6px; }
 #prompt-input:focus { border-color: var(--accent); }
@@ -67,8 +65,6 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 .wave-bar.done { background: var(--accent); height: 28px; }
 .wave-bar.active { background: var(--accent); height: 20px; animation: pulse 0.8s ease infinite; }
 @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
-
-/* PLAYER */
 #player-tab-screen { flex-direction: column; }
 #player-empty { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: var(--muted); text-align: center; padding: 40px; }
 #player-content { display: none; flex: 1; flex-direction: column; padding: 24px 20px 32px; overflow-y: auto; }
@@ -101,8 +97,6 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 .wave-item.ready .wave-dot { background: var(--muted); }
 .wave-label { font-size: 13px; flex: 1; }
 .wave-dur { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
-
-/* LIBRARY */
 #library-screen { overflow-y: auto; padding: 20px 20px 40px; -webkit-overflow-scrolling: touch; }
 .lib-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .lib-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; }
@@ -125,8 +119,6 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
 .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.3; }
 .empty-text { font-size: 14px; line-height: 1.6; }
-
-/* MODAL */
 #modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; display: none; align-items: flex-end; padding-bottom: var(--safe-bottom); }
 #modal-overlay.visible { display: flex; }
 .modal-sheet { background: var(--bg2); border-radius: 20px 20px 0 0; padding: 24px 20px 32px; width: 100%; max-height: 80vh; overflow-y: auto; }
@@ -144,18 +136,15 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 </head>
 <body>
 <div id="app">
-
 <div id="splash" class="screen active">
   <div class="splash-logo">REWIRE</div>
   <div class="splash-sub">Install your mind</div>
 </div>
-
 <div id="nav" style="display:none">
   <div class="nav-tab active" data-screen="generate">Generate</div>
   <div class="nav-tab" data-screen="player-tab">Player</div>
   <div class="nav-tab" data-screen="library">Library</div>
 </div>
-
 <div id="generate-screen" class="screen">
   <div class="prompt-wrap">
     <div class="section-label">What are we installing today?</div>
@@ -178,7 +167,6 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
   <div id="status-bar"></div>
   <div id="wave-progress"><div class="wave-bars" id="wave-bars"></div></div>
 </div>
-
 <div id="player-tab-screen" class="screen">
   <div id="player-empty">
     <div style="font-size:40px;opacity:0.3">◎</div>
@@ -187,7 +175,7 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
   <div id="player-content">
     <div class="player-topic-edit">
       <div class="player-topic" id="player-topic">—</div>
-      <button class="edit-name-btn" id="edit-name-btn" title="Rename">✎</button>
+      <button class="edit-name-btn" id="edit-name-btn">✎</button>
     </div>
     <div class="player-meta" id="player-meta">—</div>
     <div class="visualizer" id="visualizer"></div>
@@ -210,7 +198,6 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
     <div class="wave-queue" id="wave-queue"></div>
   </div>
 </div>
-
 <div id="library-screen" class="screen">
   <div class="lib-header">
     <div class="lib-title">LIBRARY</div>
@@ -220,9 +207,7 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
   </div>
   <div id="library-content"></div>
 </div>
-
 </div>
-
 <div id="modal-overlay">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -232,14 +217,11 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
     <div class="modal-actions" id="modal-actions"></div>
   </div>
 </div>
-
 <script>
 const API_BASE = 'https://require-api.onrender.com';
-
 const STORE_KEY = 'rewire_v3';
 const WORDS_PER_MIN = 150;
 const WORDS_PER_WAVE = 750;
-
 const VOICES = [
   { id: 'nPczCjzI2devNBz1zQrb', name: 'Brian',    desc: 'Deep · Narrator · American' },
   { id: 'JBFqnCBsd6RMkjVDRZzb', name: 'George',   desc: 'Warm · Refined · British' },
@@ -252,7 +234,6 @@ const VOICES = [
   { id: 'XB0fDUnXU5powFXDhCwa', name: 'Charlotte', desc: 'Sophisticated · Swedish' },
   { id: 'pFZP5JQG7iQjIQuC4Bku', name: 'Lily',     desc: 'Raspy · Expressive · British' },
 ];
-
 const SYSTEM_PROMPT = `You are a specialist in cognitive reprogramming, identity reconstruction, and accelerated knowledge internalization. Your sole purpose is to write spoken audio content that installs beliefs, knowledge, and identity shifts directly into the listener's subconscious — not through inspiration or motivation, but through deep repetition, reframing, and neurological pattern-setting.
 
 This content will be listened to while the person is active — working, walking, training, driving. It is not a meditation. It does not ask the listener to close their eyes or breathe deeply. It speaks to them as a voice they trust completely — part mentor, part truth-teller, part the version of themselves they are becoming.
@@ -270,8 +251,6 @@ On learning topics: treat knowledge as identity. Install them as things the list
 On mindset topics: speak to the person they are becoming as if they are already fully that person. By the end they should not feel motivated — they should feel like this is simply who they are.
 
 Write for the human voice. Natural rhythm. Conversational but authoritative.`;
-
-// ── STATE ──
 let state = {
   selectedVoice: VOICES[0].id,
   session: null,
@@ -286,406 +265,201 @@ let state = {
   shuffleMode: false,
 };
 const audio = new Audio();
-
-// ── STORAGE ──
-function loadSessions() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { return []; } }
-function saveSessions(s) { localStorage.setItem(STORE_KEY, JSON.stringify(s)); }
-function saveSession(s) {
-  const all = loadSessions();
-  const i = all.findIndex(x => x.id === s.id);
-  if (i >= 0) all[i] = s; else all.unshift(s);
-  saveSessions(all);
-}
-function deleteSession(id) { saveSessions(loadSessions().filter(s => s.id !== id)); }
-function renameSession(id, name) {
-  const all = loadSessions();
-  const s = all.find(x => x.id === id);
-  if (s) { s.name = name; saveSessions(all); }
-}
-function groupByMonth(sessions) {
-  const g = {};
-  sessions.forEach(s => {
-    const k = new Date(s.createdAt).toLocaleString('default', { month: 'long', year: 'numeric' });
-    if (!g[k]) g[k] = [];
-    g[k].push(s);
-  });
-  return g;
-}
-
-// ── INIT ──
-window.addEventListener('load', () => {
-  setTimeout(() => {
+function loadSessions(){try{return JSON.parse(localStorage.getItem(STORE_KEY))||[];}catch{return[];}}
+function saveSessions(s){localStorage.setItem(STORE_KEY,JSON.stringify(s));}
+function saveSession(s){const all=loadSessions();const i=all.findIndex(x=>x.id===s.id);if(i>=0)all[i]=s;else all.unshift(s);saveSessions(all);}
+function deleteSession(id){saveSessions(loadSessions().filter(s=>s.id!==id));}
+function renameSession(id,name){const all=loadSessions();const s=all.find(x=>x.id===id);if(s){s.name=name;saveSessions(all);}}
+function groupByMonth(sessions){const g={};sessions.forEach(s=>{const k=new Date(s.createdAt).toLocaleString('default',{month:'long',year:'numeric'});if(!g[k])g[k]=[];g[k].push(s);});return g;}
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
     document.getElementById('splash').classList.remove('active');
-    document.getElementById('nav').style.display = 'flex';
+    document.getElementById('nav').style.display='flex';
     document.getElementById('generate-screen').classList.add('active');
-    initVoiceGrid();
-    initTimeInputs();
-    initVisualizer();
-    renderLibrary();
-  }, 1800);
+    initVoiceGrid();initTimeInputs();initVisualizer();renderLibrary();
+  },1800);
 });
-
-// ── NAV ──
-document.querySelectorAll('.nav-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    const t = tab.dataset.screen;
-    document.querySelectorAll('.nav-tab').forEach(x => x.classList.remove('active'));
+document.querySelectorAll('.nav-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    const t=tab.dataset.screen;
+    document.querySelectorAll('.nav-tab').forEach(x=>x.classList.remove('active'));
     tab.classList.add('active');
-    document.querySelectorAll('.screen').forEach(x => x.classList.remove('active'));
-    document.getElementById(t + '-screen').classList.add('active');
-    if (t === 'library') renderLibrary();
+    document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+    document.getElementById(t+'-screen').classList.add('active');
+    if(t==='library')renderLibrary();
   });
 });
-
-function switchTab(name) {
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+function switchTab(name){
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.querySelector(`[data-screen="${name}"]`).classList.add('active');
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(name + '-screen').classList.add('active');
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(name+'-screen').classList.add('active');
 }
-
-// ── VOICE GRID ──
-function initVoiceGrid() {
-  const g = document.getElementById('voice-grid');
-  g.innerHTML = VOICES.map(v => `
-    <div class="voice-card ${v.id === state.selectedVoice ? 'selected' : ''}" data-id="${v.id}">
-      <div class="voice-dot"></div>
-      <div class="voice-name">${v.name}</div>
-      <div class="voice-desc">${v.desc}</div>
-    </div>`).join('');
-  g.querySelectorAll('.voice-card').forEach(c => c.addEventListener('click', () => {
-    state.selectedVoice = c.dataset.id;
-    g.querySelectorAll('.voice-card').forEach(x => x.classList.remove('selected'));
-    c.classList.add('selected');
-  }));
+function initVoiceGrid(){
+  const g=document.getElementById('voice-grid');
+  g.innerHTML=VOICES.map(v=>`<div class="voice-card ${v.id===state.selectedVoice?'selected':''}" data-id="${v.id}"><div class="voice-dot"></div><div class="voice-name">${v.name}</div><div class="voice-desc">${v.desc}</div></div>`).join('');
+  g.querySelectorAll('.voice-card').forEach(c=>c.addEventListener('click',()=>{state.selectedVoice=c.dataset.id;g.querySelectorAll('.voice-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');}));
 }
-
-// ── TIME INPUTS ──
-function initTimeInputs() {
-  const h = document.getElementById('hours-input');
-  const m = document.getElementById('minutes-input');
-  const update = () => {
-    let hv = Math.min(4, Math.max(0, parseInt(h.value)||0));
-    let mv = Math.min(59, Math.max(0, parseInt(m.value)||0));
-    if (hv===4) mv=0;
-    h.value=hv; m.value=mv;
-    const total = hv*60+mv;
-    const words = Math.max(WORDS_PER_WAVE, Math.round(total*WORDS_PER_MIN));
-    const waves = Math.max(1, Math.round(words/WORDS_PER_WAVE));
-    document.getElementById('wave-count').textContent = waves;
-    document.getElementById('word-count').textContent = words.toLocaleString();
-    document.getElementById('total-mins').textContent = total;
+function initTimeInputs(){
+  const h=document.getElementById('hours-input');
+  const m=document.getElementById('minutes-input');
+  const update=()=>{
+    let hv=Math.min(4,Math.max(0,parseInt(h.value)||0));
+    let mv=Math.min(59,Math.max(0,parseInt(m.value)||0));
+    if(hv===4)mv=0;
+    h.value=hv;m.value=mv;
+    const total=hv*60+mv;
+    const words=Math.max(WORDS_PER_WAVE,Math.round(total*WORDS_PER_MIN));
+    const waves=Math.max(1,Math.round(words/WORDS_PER_WAVE));
+    document.getElementById('wave-count').textContent=waves;
+    document.getElementById('word-count').textContent=words.toLocaleString();
+    document.getElementById('total-mins').textContent=total;
   };
-  h.addEventListener('input', update); m.addEventListener('input', update);
-  h.addEventListener('blur', update); m.addEventListener('blur', update);
+  h.addEventListener('input',update);m.addEventListener('input',update);
+  h.addEventListener('blur',update);m.addEventListener('blur',update);
   update();
 }
-function getTotalMins() {
-  return (parseInt(document.getElementById('hours-input').value)||0)*60 +
-         (parseInt(document.getElementById('minutes-input').value)||0);
-}
-
-// ── VISUALIZER ──
-function initVisualizer() {
-  document.getElementById('visualizer').innerHTML =
-    Array.from({length:20},()=>`<div class="vis-bar" style="height:${8+Math.random()*24}px"></div>`).join('');
-}
-function setVisualizerPlaying(on) {
-  document.querySelectorAll('.vis-bar').forEach(b => {
-    b.classList.toggle('active', on);
-    if (!on) b.style.height=(8+Math.random()*24)+'px';
-  });
-}
-
-// ── GENERATE ──
-document.getElementById('gen-btn').addEventListener('click', async () => {
-  const prompt = document.getElementById('prompt-input').value.trim();
-  if (!prompt) { showStatus('Enter a topic first.', true); return; }
-  const totalMins = getTotalMins();
-  if (totalMins < 1) { showStatus('Set at least 1 minute.', true); return; }
-
-  const totalWords = Math.max(WORDS_PER_WAVE, Math.round(totalMins*WORDS_PER_MIN));
-  const waveCount = Math.max(1, Math.round(totalWords/WORDS_PER_WAVE));
-  const wordsPerWave = Math.round(totalWords/waveCount);
-
-  state.audioBlobs = new Array(waveCount).fill(null);
-  state.session = null;
-  document.getElementById('gen-btn').disabled = true;
-  document.getElementById('player-content').style.display = 'none';
-  document.getElementById('player-empty').style.display = 'flex';
-
-  const barsEl = document.getElementById('wave-bars');
-  barsEl.innerHTML = Array.from({length:waveCount},(_,i)=>`<div class="wave-bar" id="wb-${i}"></div>`).join('');
+function getTotalMins(){return(parseInt(document.getElementById('hours-input').value)||0)*60+(parseInt(document.getElementById('minutes-input').value)||0);}
+function initVisualizer(){document.getElementById('visualizer').innerHTML=Array.from({length:20},()=>`<div class="vis-bar" style="height:${8+Math.random()*24}px"></div>`).join('');}
+function setVisualizerPlaying(on){document.querySelectorAll('.vis-bar').forEach(b=>{b.classList.toggle('active',on);if(!on)b.style.height=(8+Math.random()*24)+'px';});}
+document.getElementById('gen-btn').addEventListener('click',async()=>{
+  const prompt=document.getElementById('prompt-input').value.trim();
+  if(!prompt){showStatus('Enter a topic first.',true);return;}
+  const totalMins=getTotalMins();
+  if(totalMins<1){showStatus('Set at least 1 minute.',true);return;}
+  const totalWords=Math.max(WORDS_PER_WAVE,Math.round(totalMins*WORDS_PER_MIN));
+  const waveCount=Math.max(1,Math.round(totalWords/WORDS_PER_WAVE));
+  const wordsPerWave=Math.round(totalWords/waveCount);
+  state.audioBlobs=new Array(waveCount).fill(null);
+  state.session=null;
+  document.getElementById('gen-btn').disabled=true;
+  document.getElementById('player-content').style.display='none';
+  document.getElementById('player-empty').style.display='flex';
+  const barsEl=document.getElementById('wave-bars');
+  barsEl.innerHTML=Array.from({length:waveCount},(_,i)=>`<div class="wave-bar" id="wb-${i}"></div>`).join('');
   document.getElementById('wave-progress').classList.add('visible');
-
-  const sessionId = Date.now().toString();
-  const voiceObj = VOICES.find(v=>v.id===state.selectedVoice)||VOICES[0];
-  state.session = {
-    id: sessionId,
-    name: prompt,
-    topic: prompt,
-    createdAt: new Date().toISOString(),
-    totalMins,
-    waveCount,
-    voice: voiceObj.name,
-    voiceId: state.selectedVoice,
-    waves: [],
-  };
-
-  // Wake server
-  showStatus('Waking up server…');
-  let awake = false;
-  for (let i=0; i<8; i++) {
-    try {
-      const r = await fetch(`${API_BASE}/health`, {signal: AbortSignal.timeout(15000)});
-      if (r.ok) { awake=true; break; }
-    } catch {}
-    showStatus(`Waking up server… ${(i+1)*15}s`);
+  const sessionId=Date.now().toString();
+  const voiceObj=VOICES.find(v=>v.id===state.selectedVoice)||VOICES[0];
+  state.session={id:sessionId,name:prompt,topic:prompt,createdAt:new Date().toISOString(),totalMins,waveCount,voice:voiceObj.name,voiceId:state.selectedVoice,waves:[]};
+  showStatus('Connecting to server…');
+  let awake=false;
+  for(let i=0;i<8;i++){
+    try{const r=await fetch(`${API_BASE}/health`,{signal:AbortSignal.timeout(15000)});if(r.ok){awake=true;break;}}catch{}
+    showStatus(`Connecting… ${(i+1)*15}s`);
   }
-  if (!awake) {
-    showStatus('Server not responding. Try again in a moment.', true);
-    document.getElementById('gen-btn').disabled = false;
-    return;
-  }
-
-  // Sequential generation
-  try {
-    for (let idx=0; idx<waveCount; idx++) {
-      const position = idx===0
-        ? 'This is the opening wave. Establish the frame, break old patterns, set the stage powerfully.'
-        : idx===waveCount-1
-        ? 'This is the final wave. Anchor the identity completely. Close the loop. Leave a lasting imprint.'
-        : `This is wave ${idx+1} of ${waveCount}. Deepen the install. Approach the core truth from a new angle.`;
-
-      const fullPrompt = `${SYSTEM_PROMPT}\n\nWord target: ${wordsPerWave} words.\n\n${position}\n\nTopic/Goal: ${prompt}`;
-
-      setBar(idx, 'active');
+  if(!awake){showStatus('Server not responding. Try again.',true);document.getElementById('gen-btn').disabled=false;return;}
+  try{
+    for(let idx=0;idx<waveCount;idx++){
+      const position=idx===0?'This is the opening wave. Establish the frame, break old patterns, set the stage powerfully.':idx===waveCount-1?'This is the final wave. Anchor the identity completely. Close the loop. Leave a lasting imprint.':`This is wave ${idx+1} of ${waveCount}. Deepen the install. Approach the core truth from a new angle.`;
+      const fullPrompt=`${SYSTEM_PROMPT}\n\nWord target: ${wordsPerWave} words.\n\n${position}\n\nTopic/Goal: ${prompt}`;
+      setBar(idx,'active');
       showStatus(`Generating wave ${idx+1} of ${waveCount}…`);
-
-      const genRes = await fetch(`${API_BASE}/api/generate`, {
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({prompt: fullPrompt}),
-        signal: AbortSignal.timeout(120000),
-      });
-      if (!genRes.ok) throw new Error(`Generate failed ${genRes.status}`);
-      const genData = await genRes.json();
-      const text = genData.content || genData.text || '';
-
+      const genRes=await fetch(`${API_BASE}/api/generate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:fullPrompt}),signal:AbortSignal.timeout(120000)});
+      if(!genRes.ok)throw new Error(`Generate failed ${genRes.status}`);
+      const genData=await genRes.json();
+      const text=genData.content||genData.text||'';
       showStatus(`Synthesizing wave ${idx+1} of ${waveCount}…`);
-      const synthRes = await fetch(`${API_BASE}/api/synthesize`, {
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({text, voiceId: state.selectedVoice}),
-        signal: AbortSignal.timeout(180000),
-      });
-      if (!synthRes.ok) throw new Error(`Synth failed ${synthRes.status}`);
-      const blob = await synthRes.blob();
-      const url = URL.createObjectURL(blob);
-
-      state.audioBlobs[idx] = url;
-      state.session.waves.push({idx, text});
-      setBar(idx, 'done');
+      const synthRes=await fetch(`${API_BASE}/api/synthesize`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,voiceId:state.selectedVoice}),signal:AbortSignal.timeout(180000)});
+      if(!synthRes.ok)throw new Error(`Synth failed ${synthRes.status}`);
+      const blob=await synthRes.blob();
+      const url=URL.createObjectURL(blob);
+      state.audioBlobs[idx]=url;
+      state.session.waves.push({idx,text});
+      setBar(idx,'done');
       saveSession(state.session);
-
-      // Load player on first wave
-      if (idx===0) {
+      if(idx===0){
         loadPlayer(state.session);
         switchTab('player-tab');
-        showStatus(`Wave 1 ready — playing. Generating remaining waves…`);
+        showStatus(`Wave 1 ready — tap play to start. Generating remaining waves…`);
       }
-
       updateWaveQueue();
     }
-
     showStatus(`All ${waveCount} waves ready.`);
     saveSession(state.session);
-
-  } catch(err) {
+  }catch(err){
     console.error(err);
-    showStatus('Error: ' + err.message, true);
-  } finally {
-    document.getElementById('gen-btn').disabled = false;
+    showStatus('Error: '+err.message,true);
+  }finally{
+    document.getElementById('gen-btn').disabled=false;
   }
 });
-
-function setBar(i, s) { const b=document.getElementById(`wb-${i}`); if(b) b.className='wave-bar '+s; }
-function showStatus(msg, err=false) {
-  const el = document.getElementById('status-bar');
-  el.textContent=msg; el.style.display='block';
-  el.className='status-bar visible'+(err?' error':'');
-}
-
-// ── PLAYER ──
-function loadPlayer(session) {
+function setBar(i,s){const b=document.getElementById(`wb-${i}`);if(b)b.className='wave-bar '+s;}
+function showStatus(msg,err=false){const el=document.getElementById('status-bar');el.textContent=msg;el.style.display='block';el.className='status-bar visible'+(err?' error':'');}
+function loadPlayer(session){
   document.getElementById('player-empty').style.display='none';
   document.getElementById('player-content').style.display='flex';
   document.getElementById('player-content').style.flexDirection='column';
-  document.getElementById('player-topic').textContent = session.name||session.topic;
-  const vn = VOICES.find(v=>v.id===session.voiceId)?.name||session.voice;
-  document.getElementById('player-meta').innerHTML =
-    `<span>${session.waveCount} waves</span> · <span>${session.totalMins} min</span> · ${vn}`;
+  document.getElementById('player-topic').textContent=session.name||session.topic;
+  const vn=VOICES.find(v=>v.id===session.voiceId)?.name||session.voice;
+  document.getElementById('player-meta').innerHTML=`<span>${session.waveCount} waves</span> · <span>${session.totalMins} min</span> · ${vn}`;
   state.currentWave=0;
-  if (state.audioBlobs[0]) loadWave(0);
+  if(state.audioBlobs[0])loadWave(0);
   updateWaveQueue();
 }
-
-function loadSessionFromLibrary(session) {
-  // Re-synthesize from saved text
-  state.session = session;
-  state.audioBlobs = new Array(session.waveCount).fill(null);
+function loadSessionFromLibrary(session){
+  state.session=session;
+  state.audioBlobs=new Array(session.waveCount).fill(null);
   loadPlayer(session);
   switchTab('player-tab');
-
-  // Synthesize waves sequentially
-  (async () => {
-    for (let idx=0; idx<session.waves.length; idx++) {
-      const wave = session.waves.find(w=>w.idx===idx);
-      if (!wave) continue;
-      try {
-        const res = await fetch(`${API_BASE}/api/synthesize`, {
-          method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({text: wave.text, voiceId: session.voiceId}),
-          signal: AbortSignal.timeout(180000),
-        });
-        if (!res.ok) continue;
-        state.audioBlobs[idx] = URL.createObjectURL(await res.blob());
-        if (idx===0) { loadWave(0); audio.play(); setPlaying(true); }
+  (async()=>{
+    for(let idx=0;idx<session.waves.length;idx++){
+      const wave=session.waves.find(w=>w.idx===idx);
+      if(!wave)continue;
+      try{
+        showStatus(`Loading wave ${idx+1} of ${session.waves.length}…`);
+        const res=await fetch(`${API_BASE}/api/synthesize`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:wave.text,voiceId:session.voiceId}),signal:AbortSignal.timeout(180000)});
+        if(!res.ok)continue;
+        state.audioBlobs[idx]=URL.createObjectURL(await res.blob());
+        if(idx===0){loadWave(0);}
         updateWaveQueue();
-      } catch(e) { console.error(e); }
+      }catch(e){console.error(e);}
     }
+    showStatus('Session ready — tap play.');
   })();
 }
-
-function loadWave(idx) {
-  const url = state.audioBlobs[idx];
-  if (!url) return;
-  audio.src=url;
-  audio.playbackRate=state.speeds[state.speedIdx];
-  state.currentWave=idx;
-  updateWaveQueue();
-}
-
-function updateWaveQueue() {
-  if (!state.session) return;
-  const el = document.getElementById('wave-queue');
-  el.innerHTML = Array.from({length:state.session.waveCount},(_,i)=>{
+function loadWave(idx){const url=state.audioBlobs[idx];if(!url)return;audio.src=url;audio.playbackRate=state.speeds[state.speedIdx];state.currentWave=idx;updateWaveQueue();}
+function updateWaveQueue(){
+  if(!state.session)return;
+  const el=document.getElementById('wave-queue');
+  el.innerHTML=Array.from({length:state.session.waveCount},(_,i)=>{
     const ready=!!state.audioBlobs[i];
     const playing=i===state.currentWave&&state.isPlaying;
-    return `<div class="wave-item ${playing?'playing':ready?'ready':''}" data-idx="${i}">
-      <div class="wave-num">${String(i+1).padStart(2,'0')}</div>
-      <div class="wave-dot"></div>
-      <div class="wave-label">Wave ${i+1}${playing?' — playing':!ready?' — generating…':''}</div>
-      <div class="wave-dur">${ready?'~'+Math.round(WORDS_PER_WAVE/WORDS_PER_MIN)+'m':'…'}</div>
-    </div>`;
+    return`<div class="wave-item ${playing?'playing':ready?'ready':''}" data-idx="${i}"><div class="wave-num">${String(i+1).padStart(2,'0')}</div><div class="wave-dot"></div><div class="wave-label">Wave ${i+1}${playing?' — playing':!ready?' — generating…':''}</div><div class="wave-dur">${ready?'~'+Math.round(WORDS_PER_WAVE/WORDS_PER_MIN)+'m':'…'}</div></div>`;
   }).join('');
-  el.querySelectorAll('.wave-item').forEach(item=>item.addEventListener('click',()=>{
-    const i=parseInt(item.dataset.idx);
-    if(state.audioBlobs[i]){loadWave(i);audio.play();setPlaying(true);}
-  }));
+  el.querySelectorAll('.wave-item').forEach(item=>item.addEventListener('click',()=>{const i=parseInt(item.dataset.idx);if(state.audioBlobs[i]){loadWave(i);audio.play();setPlaying(true);}}));
 }
-
-// Player controls
-document.getElementById('play-btn').addEventListener('click',()=>{
-  if(audio.paused){audio.play();setPlaying(true);}else{audio.pause();setPlaying(false);}
-});
+document.getElementById('play-btn').addEventListener('click',()=>{if(audio.paused){audio.play();setPlaying(true);}else{audio.pause();setPlaying(false);}});
 document.getElementById('skip-back-btn').addEventListener('click',()=>{audio.currentTime=Math.max(0,audio.currentTime-15);});
 document.getElementById('skip-fwd-btn').addEventListener('click',()=>{audio.currentTime=Math.min(audio.duration||0,audio.currentTime+15);});
-document.getElementById('prev-wave-btn').addEventListener('click',()=>{
-  if(state.currentWave>0){loadWave(state.currentWave-1);if(state.isPlaying)audio.play();}
-});
-document.getElementById('next-wave-btn').addEventListener('click',()=>{
-  const n=state.currentWave+1;
-  if(n<(state.session?.waveCount||0)&&state.audioBlobs[n]){loadWave(n);if(state.isPlaying)audio.play();}
-});
-document.getElementById('speed-btn').addEventListener('click',()=>{
-  state.speedIdx=(state.speedIdx+1)%state.speeds.length;
-  audio.playbackRate=state.speeds[state.speedIdx];
-  document.getElementById('speed-btn').textContent=state.speeds[state.speedIdx]+'×';
-});
-document.getElementById('loop-btn').addEventListener('click',()=>{
-  state.loop=!state.loop;
-  const b=document.getElementById('loop-btn');
-  b.textContent=state.loop?'Loop On':'Loop Off';
-  b.classList.toggle('on',state.loop);
-});
-
-audio.addEventListener('ended',()=>{
-  const n=state.currentWave+1;
-  if(n<(state.session?.waveCount||0)&&state.audioBlobs[n]){
-    loadWave(n);audio.play();
-  } else if(state.shuffleMode){
-    playNextShuffle();
-  } else if(state.loop&&state.audioBlobs[0]){
-    loadWave(0);audio.play();
-  } else {
-    setPlaying(false);
-  }
-});
-
-audio.addEventListener('timeupdate',()=>{
-  if(!audio.duration)return;
-  document.getElementById('progress-bar').value=(audio.currentTime/audio.duration)*100;
-  document.getElementById('time-current').textContent=fmt(audio.currentTime);
-  document.getElementById('time-total').textContent=fmt(audio.duration);
-});
-document.getElementById('progress-bar').addEventListener('input',e=>{
-  if(audio.duration)audio.currentTime=(e.target.value/100)*audio.duration;
-});
-
-function setPlaying(v){
-  state.isPlaying=v;
-  document.getElementById('play-btn').textContent=v?'⏸':'▶';
-  setVisualizerPlaying(v);
-  updateWaveQueue();
-}
+document.getElementById('prev-wave-btn').addEventListener('click',()=>{if(state.currentWave>0){loadWave(state.currentWave-1);if(state.isPlaying)audio.play();}});
+document.getElementById('next-wave-btn').addEventListener('click',()=>{const n=state.currentWave+1;if(n<(state.session?.waveCount||0)&&state.audioBlobs[n]){loadWave(n);if(state.isPlaying)audio.play();}});
+document.getElementById('speed-btn').addEventListener('click',()=>{state.speedIdx=(state.speedIdx+1)%state.speeds.length;audio.playbackRate=state.speeds[state.speedIdx];document.getElementById('speed-btn').textContent=state.speeds[state.speedIdx]+'×';});
+document.getElementById('loop-btn').addEventListener('click',()=>{state.loop=!state.loop;const b=document.getElementById('loop-btn');b.textContent=state.loop?'Loop On':'Loop Off';b.classList.toggle('on',state.loop);});
+audio.addEventListener('ended',()=>{const n=state.currentWave+1;if(n<(state.session?.waveCount||0)&&state.audioBlobs[n]){loadWave(n);audio.play();}else if(state.shuffleMode){playNextShuffle();}else if(state.loop&&state.audioBlobs[0]){loadWave(0);audio.play();}else{setPlaying(false);}});
+audio.addEventListener('timeupdate',()=>{if(!audio.duration)return;document.getElementById('progress-bar').value=(audio.currentTime/audio.duration)*100;document.getElementById('time-current').textContent=fmt(audio.currentTime);document.getElementById('time-total').textContent=fmt(audio.duration);});
+document.getElementById('progress-bar').addEventListener('input',e=>{if(audio.duration)audio.currentTime=(e.target.value/100)*audio.duration;});
+function setPlaying(v){state.isPlaying=v;document.getElementById('play-btn').textContent=v?'⏸':'▶';setVisualizerPlaying(v);updateWaveQueue();}
 function fmt(s){if(!s||isNaN(s))return'0:00';return`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;}
-
-// Edit name
 document.getElementById('edit-name-btn').addEventListener('click',()=>{
   if(!state.session)return;
-  showModal('Rename Session','',[],'text',state.session.name||state.session.topic,[
+  showModal('Rename Session','','text',state.session.name||state.session.topic,[
     {label:'Cancel',action:hideModal},
-    {label:'Save',cls:'primary',action:()=>{
-      const val=document.getElementById('modal-input').value.trim();
-      if(val&&state.session){
-        state.session.name=val;
-        saveSession(state.session);
-        document.getElementById('player-topic').textContent=val;
-      }
-      hideModal();
-    }}
+    {label:'Save',cls:'primary',action:()=>{const val=document.getElementById('modal-input').value.trim();if(val&&state.session){state.session.name=val;saveSession(state.session);document.getElementById('player-topic').textContent=val;}hideModal();}}
   ]);
 });
-
-// ── SHUFFLE ──
 document.getElementById('shuffle-btn').addEventListener('click',()=>{
   const sessions=loadSessions();
-  if(!sessions.length){return;}
+  if(!sessions.length)return;
   const shuffled=[...sessions].sort(()=>Math.random()-0.5);
-  state.shuffleQueue=shuffled;
-  state.shuffleIdx=0;
-  state.shuffleMode=true;
+  state.shuffleQueue=shuffled;state.shuffleIdx=0;state.shuffleMode=true;
   loadSessionFromLibrary(shuffled[0]);
-  showStatus('Shuffle mode on — loading sessions in random order.');
+  showStatus('Shuffle mode — sessions playing in random order.');
 });
-
-function playNextShuffle(){
-  state.shuffleIdx++;
-  if(state.shuffleIdx>=state.shuffleQueue.length){
-    state.shuffleMode=false;
-    setPlaying(false);
-    return;
-  }
-  loadSessionFromLibrary(state.shuffleQueue[state.shuffleIdx]);
-}
-
-// ── LIBRARY ──
+function playNextShuffle(){state.shuffleIdx++;if(state.shuffleIdx>=state.shuffleQueue.length){state.shuffleMode=false;setPlaying(false);return;}loadSessionFromLibrary(state.shuffleQueue[state.shuffleIdx]);}
 function renderLibrary(){
   const sessions=loadSessions();
   const content=document.getElementById('library-content');
-  if(!sessions.length){
-    content.innerHTML=`<div class="empty-state"><div class="empty-icon">◎</div><div class="empty-text">No sessions yet.<br>Generate your first install.</div></div>`;
-    return;
-  }
+  if(!sessions.length){content.innerHTML=`<div class="empty-state"><div class="empty-icon">◎</div><div class="empty-text">No sessions yet.<br>Generate your first install.</div></div>`;return;}
   const groups=groupByMonth(sessions);
   content.innerHTML=Object.entries(groups).map(([month,items],gi)=>`
     <div class="folder ${gi===0?'open':''}" id="fold-${gi}">
@@ -693,96 +467,48 @@ function renderLibrary(){
         <div class="folder-name"><span>📁</span>${month} <span style="color:var(--muted);margin-left:4px">${items.length}</span></div>
         <div class="folder-arrow">▶</div>
       </div>
-      <div class="folder-items">
-        ${items.map(s=>{
-          const d=new Date(s.createdAt);
-          const displayName=s.name||s.topic;
-          return `<div class="session-card">
-            <div class="session-info">
-              <div class="session-name">${displayName}</div>
-              <div class="session-meta">
-                <span>${d.toLocaleDateString('default',{month:'short',day:'numeric'})}</span>
-                <span>${s.totalMins}min</span>
-                <span>${s.voice||'Daniel'}</span>
-                <span>${s.waveCount} waves</span>
-              </div>
-            </div>
-            <div class="session-actions">
-              <button class="sess-btn" title="Play" onclick="libPlay('${s.id}')">▶</button>
-              <button class="sess-btn" title="Rename" onclick="libRename('${s.id}')">✎</button>
-              <button class="sess-btn" title="Reload prompt" onclick="libReload('${s.id}')">↺</button>
-              <button class="sess-btn" title="Delete" onclick="libDelete('${s.id}')">✕</button>
-            </div>
-          </div>`;
-        }).join('')}
-      </div>
+      <div class="folder-items">${items.map(s=>{
+        const d=new Date(s.createdAt);
+        return`<div class="session-card"><div class="session-info"><div class="session-name">${s.name||s.topic}</div><div class="session-meta"><span>${d.toLocaleDateString('default',{month:'short',day:'numeric'})}</span><span>${s.totalMins}min</span><span>${s.voice||'Daniel'}</span><span>${s.waveCount} waves</span></div></div><div class="session-actions"><button class="sess-btn" onclick="libPlay('${s.id}')">▶</button><button class="sess-btn" onclick="libRename('${s.id}')">✎</button><button class="sess-btn" onclick="libReload('${s.id}')">↺</button><button class="sess-btn" onclick="libDelete('${s.id}')">✕</button></div></div>`;
+      }).join('')}</div>
     </div>`).join('');
 }
-
 window.toggleFolder=id=>document.getElementById(id).classList.toggle('open');
-
-window.libPlay=id=>{
-  const s=loadSessions().find(x=>x.id===id);
-  if(!s)return;
-  loadSessionFromLibrary(s);
-};
-
+window.libPlay=id=>{const s=loadSessions().find(x=>x.id===id);if(!s)return;loadSessionFromLibrary(s);};
 window.libRename=id=>{
-  const s=loadSessions().find(x=>x.id===id);
-  if(!s)return;
-  showModal('Rename Session','',[],'text',s.name||s.topic,[
+  const s=loadSessions().find(x=>x.id===id);if(!s)return;
+  showModal('Rename Session','','text',s.name||s.topic,[
     {label:'Cancel',action:hideModal},
-    {label:'Save',cls:'primary',action:()=>{
-      const val=document.getElementById('modal-input').value.trim();
-      if(val)renameSession(id,val);
-      hideModal();renderLibrary();
-    }}
+    {label:'Save',cls:'primary',action:()=>{const val=document.getElementById('modal-input').value.trim();if(val)renameSession(id,val);hideModal();renderLibrary();}}
   ]);
 };
-
 window.libReload=id=>{
-  const s=loadSessions().find(x=>x.id===id);
-  if(!s)return;
+  const s=loadSessions().find(x=>x.id===id);if(!s)return;
   document.getElementById('prompt-input').value=s.topic;
   document.getElementById('hours-input').value=Math.floor(s.totalMins/60);
   document.getElementById('minutes-input').value=s.totalMins%60;
   document.getElementById('hours-input').dispatchEvent(new Event('input'));
   switchTab('generate');
 };
-
 window.libDelete=id=>{
-  const s=loadSessions().find(x=>x.id===id);
-  if(!s)return;
-  showModal('Delete Session',`Delete "${(s.name||s.topic).substring(0,50)}"? This cannot be undone.`,[],'none','',[
+  const s=loadSessions().find(x=>x.id===id);if(!s)return;
+  showModal('Delete Session',`Delete "${(s.name||s.topic).substring(0,50)}"? This cannot be undone.`,'none','',[
     {label:'Cancel',action:hideModal},
     {label:'Delete',cls:'danger',action:()=>{deleteSession(id);hideModal();renderLibrary();}}
   ]);
 };
-
-// ── MODAL ──
-function showModal(title,body,actions,inputType='none',inputVal='',$actions){
+function showModal(title,body,inputType='none',inputVal='',$actions){
   document.getElementById('modal-title').textContent=title;
   document.getElementById('modal-body').textContent=body;
   const inp=document.getElementById('modal-input');
-  if(inputType==='text'){inp.style.display='block';inp.value=inputVal||'';}
-  else inp.style.display='none';
-  const actEl=document.getElementById('modal-actions');
-  actEl.innerHTML='';
-  const acts=$actions||actions;
-  acts.forEach(a=>{
-    const b=document.createElement('button');
-    b.className=`modal-btn ${a.cls||''}`;
-    b.textContent=a.label;
-    b.addEventListener('click',a.action);
-    actEl.appendChild(b);
-  });
+  if(inputType==='text'){inp.style.display='block';inp.value=inputVal||'';}else inp.style.display='none';
+  const actEl=document.getElementById('modal-actions');actEl.innerHTML='';
+  $actions.forEach(a=>{const b=document.createElement('button');b.className=`modal-btn ${a.cls||''}`;b.textContent=a.label;b.addEventListener('click',a.action);actEl.appendChild(b);});
   document.getElementById('modal-overlay').classList.add('visible');
   if(inputType==='text')setTimeout(()=>inp.focus(),100);
 }
 function hideModal(){document.getElementById('modal-overlay').classList.remove('visible');}
-document.getElementById('modal-overlay').addEventListener('click',e=>{
-  if(e.target===document.getElementById('modal-overlay'))hideModal();
-});
+document.getElementById('modal-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('modal-overlay'))hideModal();});
 </script>
 </body>
 </html>
