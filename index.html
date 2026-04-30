@@ -438,16 +438,15 @@ document.getElementById('gen-btn').addEventListener('click',async()=>{
       const gd=await gr.json();
       const text=gd.content||gd.text||'';
       showSt(`Synthesizing ${idx+1}/${segCount}…`);
-      let buf=null;
-      for(let a=0;a<2;a++){
-        try{
-          const sr=await fetch(`${API_BASE}/api/synthesize`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,voiceId:S.voice}),signal:AbortSignal.timeout(180000)});
-          if(sr.ok){buf=await sr.arrayBuffer();break;}
-        }catch(e){if(a===0)showSt(`Retrying ${idx+1}…`);}
-      }
+    let buf=null;
+      try{
+        const sr=await fetch(`${API_BASE}/api/synthesize`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,voiceId:S.voice}),signal:AbortSignal.timeout(180000)});
+        if(sr.ok) buf=await sr.arrayBuffer();
+      }catch(e){console.error('Synth error:',e);}
       S.session.waves.push({idx,text});
-      if(buf){S.bufs[idx]=buf;S.blobs[idx]=URL.createObjectURL(new Blob([buf],{type:'audio/mpeg'}));setBar(idx,'done');}
-      else{setBar(idx,'done');S.failed=true;}
+      setBar(idx,'done');
+      if(buf){S.bufs[idx]=buf;S.blobs[idx]=URL.createObjectURL(new Blob([buf],{type:'audio/mpeg'}));}
+      else{S.failed=true;}
       upsertSession(S.session);
       if(idx===0){loadPlayer(S.session);goTab('player-tab');showSt(`Ready — generating remaining…`);}
       updateSegs();
