@@ -582,12 +582,13 @@ document.getElementById('gen-btn').addEventListener('click',async()=>{
         if(sr.ok) buf=await sr.arrayBuffer();
       }catch(e){console.error('Synth error:',e);}
 
-      setBar(idx,'done');
+            setBar(idx,'done');
       if(buf){
         S.bufs[idx]=buf;
         S.blobs[idx]=URL.createObjectURL(new Blob([buf],{type:'audio/mpeg'}));
       } else {
         S.failed=true;
+        addRetryBar(idx, chunks[idx]);
       }
 
       if(idx===0){
