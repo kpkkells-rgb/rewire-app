@@ -37,14 +37,30 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 #generate-screen { overflow: hidden; }
 #gen-scroll { flex: 1; overflow-y: auto; padding: 24px 20px 40px; -webkit-overflow-scrolling: touch; }
 .prompt-wrap { margin-bottom: 24px; }
-#prompt-input { width: 100%; background: var(–bg2); border: 1px solid var(–muted2); border-radius: var(–radius); color: var(–text); font-family: ‘DM Sans’, sans-serif; font-size: 15px; line-height: 1.6; padding: 16px; resize: none; min-height: 120px; outline: none; transition: border-color 0.2s; }
+#prompt-input {
+width: 100%;
+background: var(–bg2);
+border: 1px solid var(–muted2);
+border-radius: var(–radius);
+color: var(–text);
+font-family: ‘DM Sans’, sans-serif;
+font-size: 15px;
+line-height: 1.6;
+padding: 16px;
+resize: none;
+min-height: 120px;
+outline: none;
+transition: border-color 0.2s;
+-webkit-appearance: none;
+appearance: none;
+}
 #prompt-input:focus { border-color: var(–accent); }
 #prompt-input::placeholder { color: var(–muted); }
 .time-wrap { margin-bottom: 24px; }
 .time-inputs { display: flex; gap: 12px; align-items: center; }
 .time-field { flex: 1; background: var(–bg2); border: 1px solid var(–muted2); border-radius: var(–radius); padding: 14px 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .time-field label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(–muted); font-family: ‘DM Mono’, monospace; }
-.time-field input[type=number] { background: transparent; border: none; outline: none; color: var(–text); font-family: ‘Bebas Neue’, sans-serif; font-size: 36px; text-align: center; width: 100%; -webkit-appearance: none; }
+.time-field input[type=number] { background: transparent; border: none; outline: none; color: var(–text); font-family: ‘Bebas Neue’, sans-serif; font-size: 36px; text-align: center; width: 100%; -webkit-appearance: none; appearance: none; }
 .time-field input::-webkit-inner-spin-button,.time-field input::-webkit-outer-spin-button{-webkit-appearance:none;}
 .time-colon { font-family: ‘Bebas Neue’, sans-serif; font-size: 36px; color: var(–muted); }
 .time-summary { margin-top: 10px; font-size: 12px; color: var(–muted); font-family: ‘DM Mono’, monospace; }
@@ -64,14 +80,38 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 
 .voice-wrap { margin-bottom: 24px; }
 .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.voice-card { background: var(–bg2); border: 1px solid var(–muted2); border-radius: var(–radius); padding: 12px 14px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+.voice-card {
+background: var(–bg2);
+border: 1px solid var(–muted2);
+border-radius: var(–radius);
+padding: 12px 14px;
+cursor: pointer;
+transition: border-color 0.2s, background 0.2s;
+-webkit-appearance: none;
+appearance: none;
+}
 .voice-card.selected { border-color: var(–accent); background: rgba(200,240,96,0.06); }
 .voice-dot { width: 6px; height: 6px; border-radius: 50%; background: var(–muted2); margin-bottom: 6px; transition: background 0.2s; }
 .voice-card.selected .voice-dot { background: var(–accent); }
 .voice-name { font-size: 14px; font-weight: 500; }
 .voice-desc { font-size: 11px; color: var(–muted); margin-top: 2px; }
-#gen-btn { width: 100%; background: var(–accent); color: var(–bg); border: none; border-radius: var(–radius); font-family: ‘Bebas Neue’, sans-serif; font-size: 22px; letter-spacing: 4px; padding: 18px; cursor: pointer; }
-#gen-btn:disabled { background: var(–muted2); color: var(–muted); }
+
+#gen-btn {
+width: 100%;
+background-color: var(–accent);
+color: var(–bg);
+border: none;
+border-radius: var(–radius);
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 22px;
+letter-spacing: 4px;
+padding: 18px;
+cursor: pointer;
+-webkit-appearance: none;
+appearance: none;
+}
+#gen-btn:disabled { background-color: var(–muted2); color: var(–muted); }
+
 #gen-status { margin-top: 16px; padding: 14px 16px; background: var(–bg2); border-radius: var(–radius); border-left: 3px solid var(–accent); font-size: 13px; color: var(–muted); display: none; font-family: ‘DM Mono’, monospace; line-height: 1.5; }
 #gen-status.visible { display: block; }
 #gen-status.error { border-color: var(–danger); color: var(–danger); }
@@ -111,9 +151,9 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 .prog-times { display: flex; justify-content: space-between; font-size: 11px; color: var(–muted); font-family: ‘DM Mono’, monospace; margin-top: 5px; margin-bottom: 14px; }
 .player-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 14px; }
 .ctrl-btn { background: none; border: none; color: var(–text); cursor: pointer; opacity: 0.5; font-size: 20px; padding: 8px; }
-#play-btn { width: 60px; height: 60px; background: var(–accent); border-radius: 50%; border: none; cursor: pointer; font-size: 22px; color: var(–bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+#play-btn { width: 60px; height: 60px; background: var(–accent); border-radius: 50%; border: none; cursor: pointer; font-size: 22px; color: var(–bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; -webkit-appearance: none; appearance: none; }
 .player-extras { display: flex; gap: 8px; margin-bottom: 16px; }
-.extra-btn { flex: 1; background: var(–bg2); border: 1px solid var(–muted2); border-radius: 8px; color: var(–muted); font-family: ‘DM Mono’, monospace; font-size: 11px; padding: 9px 4px; cursor: pointer; text-align: center; }
+.extra-btn { flex: 1; background: var(–bg2); border: 1px solid var(–muted2); border-radius: 8px; color: var(–muted); font-family: ‘DM Mono’, monospace; font-size: 11px; padding: 9px 4px; cursor: pointer; text-align: center; -webkit-appearance: none; appearance: none; }
 .extra-btn.on { border-color: var(–accent); color: var(–accent); }
 .extra-btn.hi { border-color: var(–accent); color: var(–accent); }
 .seg-list { flex: 1; }
@@ -134,7 +174,7 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 .lib-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .lib-title { font-family: ‘Bebas Neue’, sans-serif; font-size: 28px; letter-spacing: 3px; }
 .lib-count { font-family: ‘DM Mono’, monospace; font-size: 11px; color: var(–muted); }
-.lib-shuffle { padding: 8px 16px; border-radius: 20px; border: 1px solid var(–accent); background: none; color: var(–accent); font-family: ‘DM Mono’, monospace; font-size: 11px; cursor: pointer; }
+.lib-shuffle { padding: 8px 16px; border-radius: 20px; border: 1px solid var(–accent); background: none; color: var(–accent); font-family: ‘DM Mono’, monospace; font-size: 11px; cursor: pointer; -webkit-appearance: none; appearance: none; }
 #lib-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 #lib-list { padding: 0 20px 40px; }
 .sc { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(–muted2); }
@@ -145,7 +185,7 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 .sc-info { flex: 1; min-width: 0; }
 .sc-name { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
 .sc-meta { font-size: 11px; color: var(–muted); font-family: ‘DM Mono’, monospace; display: flex; gap: 8px; }
-.sc-play { width: 34px; height: 34px; border-radius: 50%; background: var(–accent); border: none; color: var(–bg); font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sc-play { width: 34px; height: 34px; border-radius: 50%; background: var(–accent); border: none; color: var(–bg); font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; -webkit-appearance: none; appearance: none; }
 .sc-more { width: 30px; height: 30px; background: none; border: none; color: var(–muted); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .empty-state { text-align: center; padding: 60px 20px; color: var(–muted); }
 .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.3; }
@@ -162,9 +202,9 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 .msg.ai { background: var(–bg2); color: var(–text); align-self: flex-start; border-radius: 14px 14px 14px 4px; }
 .msg.thinking { color: var(–muted); font-style: italic; }
 #st-input-row { padding: 12px 16px; padding-bottom: calc(12px + var(–safe-bottom)); border-top: 1px solid var(–muted2); display: flex; gap: 10px; background: var(–bg); flex-shrink: 0; }
-#st-input { flex: 1; background: var(–bg2); border: 1px solid var(–muted2); border-radius: 24px; color: var(–text); font-family: ‘DM Sans’, sans-serif; font-size: 15px; padding: 11px 16px; outline: none; }
+#st-input { flex: 1; background: var(–bg2); border: 1px solid var(–muted2); border-radius: 24px; color: var(–text); font-family: ‘DM Sans’, sans-serif; font-size: 15px; padding: 11px 16px; outline: none; -webkit-appearance: none; appearance: none; }
 #st-input:focus { border-color: var(–accent); }
-#st-send { width: 42px; height: 42px; border-radius: 50%; background: var(–accent); border: none; color: var(–bg); font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+#st-send { width: 42px; height: 42px; border-radius: 50%; background-color: var(–accent); border: none; color: var(–bg); font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; -webkit-appearance: none; appearance: none; }
 
 /* MODAL */
 #modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 100; display: none; align-items: flex-end; padding-bottom: var(–safe-bottom); }
@@ -173,11 +213,11 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 .modal-handle { width: 40px; height: 4px; background: var(–muted2); border-radius: 2px; margin: 0 auto 20px; }
 .modal-title { font-family: ‘Bebas Neue’, sans-serif; font-size: 22px; letter-spacing: 3px; margin-bottom: 14px; }
 .modal-body { font-size: 14px; line-height: 1.7; color: var(–muted); margin-bottom: 18px; }
-.modal-inp { width: 100%; background: var(–bg3); border: 1px solid var(–muted2); border-radius: var(–radius); color: var(–text); font-family: ‘DM Sans’, sans-serif; font-size: 15px; padding: 13px; outline: none; margin-bottom: 14px; }
+.modal-inp { width: 100%; background: var(–bg3); border: 1px solid var(–muted2); border-radius: var(–radius); color: var(–text); font-family: ‘DM Sans’, sans-serif; font-size: 15px; padding: 13px; outline: none; margin-bottom: 14px; -webkit-appearance: none; appearance: none; }
 .modal-inp:focus { border-color: var(–accent); }
 .modal-actions { display: flex; gap: 10px; }
-.modal-btn { flex: 1; padding: 13px; border-radius: var(–radius); border: 1px solid var(–muted2); background: none; color: var(–text); font-family: ‘DM Sans’, sans-serif; font-size: 14px; cursor: pointer; }
-.modal-btn.primary { background: var(–accent); color: var(–bg); border-color: var(–accent); font-weight: 600; }
+.modal-btn { flex: 1; padding: 13px; border-radius: var(–radius); border: 1px solid var(–muted2); background: none; color: var(–text); font-family: ‘DM Sans’, sans-serif; font-size: 14px; cursor: pointer; -webkit-appearance: none; appearance: none; }
+.modal-btn.primary { background-color: var(–accent); color: var(–bg); border-color: var(–accent); font-weight: 600; }
 .modal-btn.danger { border-color: var(–danger); color: var(–danger); }
 ::-webkit-scrollbar { width: 0; }
 </style>
