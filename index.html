@@ -582,13 +582,12 @@ document.getElementById('gen-btn').addEventListener('click',async()=>{
         if(sr.ok) buf=await sr.arrayBuffer();
       }catch(e){console.error('Synth error:',e);}
 
-            setBar(idx,'done');
+      setBar(idx,'done');
       if(buf){
         S.bufs[idx]=buf;
         S.blobs[idx]=URL.createObjectURL(new Blob([buf],{type:'audio/mpeg'}));
       } else {
         S.failed=true;
-        addRetryBar(idx, chunks[idx]);
       }
 
       if(idx===0){
@@ -617,46 +616,6 @@ document.getElementById('gen-btn').addEventListener('click',async()=>{
 });
 
 function setBar(i,s){const b=document.getElementById(`wb-${i}`);if(b)b.className='wave-bar '+s;}
-function addRetryBar(idx, text) {
-  const b = document.getElementById(`wb-${idx}`);
-  if (!b) return;
-  b.style.background = 'var(--danger)';
-  b.style.height = '28px';
-  b.style.cursor = 'pointer';
-  b.title = 'Tap to retry';
-  b.onclick = async () => {
-    b.style.background = 'var(--accent)';
-    b.style.animation = 'pulse 0.8s ease infinite';
-    b.onclick = null;
-    try {
-      const sr = await fetch(`${API_BASE}/api/synthesize`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({text, voiceId: S.voice}),
-        signal: AbortSignal.timeout(180000),
-      });
-      if (sr.ok) {
-        const buf = await sr.arrayBuffer();
-        S.bufs[idx] = buf;
-        S.blobs[idx] = URL.createObjectURL(new Blob([buf], {type:'audio/mpeg'}));
-        b.style.animation = '';
-        b.style.cursor = 'default';
-        upsertSession(S.session);
-        updateSegs();
-        showSt(`Segment ${idx+1} ready.`);
-      } else {
-        b.style.background = 'var(--danger)';
-        b.style.animation = '';
-        b.onclick = () => addRetryBar(idx, text);
-        showSt(`Segment ${idx+1} still failing — tap red bar to retry again.`, true);
-      }
-    } catch(e) {
-      b.style.background = 'var(--danger)';
-      b.style.animation = '';
-      addRetryBar(idx, text);
-    }
-  };
-}
 
 function loadPlayer(sess){
   document.getElementById('player-empty').style.display='none';
