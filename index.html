@@ -102,7 +102,7 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 @keyframes ldot{0%,100%{opacity:0.3}50%{opacity:1}}
 
 /* LIBRARY */
-#library-screen { display:flex; flex-direction:column; overflow:hidden; }
+#library-screen { overflow-y:auto; padding:20px 20px 40px; -webkit-overflow-scrolling:touch; }
 .lib-top { padding:20px 20px 12px; flex-shrink:0; }
 .lib-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
 .lib-title { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:3px; }
